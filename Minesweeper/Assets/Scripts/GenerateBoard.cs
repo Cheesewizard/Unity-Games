@@ -19,13 +19,6 @@ public class GenerateBoard : MonoBehaviour
     void Start()
     {
         tiles = new GameObject[columns, rows];
-        for (int x = 0; x < columns; x++)
-        {
-            for (int y = 0; y < rows; y++)
-            {
-                // tiles[x, y] = new Tile;
-            }
-        }
 
         CreateBoard();
         CreateMines(minesTotal);
@@ -47,7 +40,6 @@ public class GenerateBoard : MonoBehaviour
                 var posx = x * width;
                 var posy = y * width;
                 tiles[x, y] = Instantiate(tile, new Vector3(start_x + posx, -start_y + posy), Quaternion.Euler(90, 0, 0));
-                tiles[x, y].GetComponent<TileStates>().IsRevealed = true;
             }
         }
     }
