@@ -98,6 +98,7 @@ public class GenerateBoard : MonoBehaviour
 
                 if (!tiles[x, y].GetComponent<TileStates>().IsBomb)
                 {
+                    // Assign text to amount of nearby bombs
                     tiles[x, y].GetComponent<TileStates>().TotalBombs = total;
                     //number.GetComponent<TextMesh>().text = total.ToString();
                     total = 0;
