@@ -2,38 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenerateBoard : MonoBehaviour
+public class GameBoard : MonoBehaviour, IGameBoard
 {
-
-    public int columns;
-    public int rows;
-    public float width;
-
-    public float start_x, start_y;
-    public int minesTotal = 10;
-
-    public GameObject tile;
-    public GameObject[,] tiles;
-
-    // Start is called before the first frame update
-    void Start()
+    public GameObject[,] CreateBoard(GameObject tile, float width, int rows, int cols, int start_x, int start_y)
     {
-        tiles = new GameObject[columns, rows];
+        var tiles = new GameObject[rows, cols];
 
-        CreateBoard();
-        CreateMines(minesTotal);
-        GenerateNumbers();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void CreateBoard()
-    {
-        for (int x = 0; x < columns; x++)
+        for (int x = 0; x < cols; x++)
         {
             for (int y = 0; y < rows; y++)
             {
@@ -42,13 +17,15 @@ public class GenerateBoard : MonoBehaviour
                 tiles[x, y] = Instantiate(tile, new Vector3(start_x + posx, -start_y + posy), Quaternion.Euler(90, 0, 0));
             }
         }
+
+        return tiles;
     }
 
-    public void CreateMines(int mines)
+    public void CreateMines(GameObject[,] tiles, int mines, int rows, int cols)
     {
         for (int x = 0; x < mines; x++)
         {
-            var col = Random.Range(0, columns);
+            var col = Random.Range(0, cols);
             var row = Random.Range(0, rows);
 
             if (tiles[col, row].GetComponent<TileStates>().IsBomb)
@@ -64,13 +41,13 @@ public class GenerateBoard : MonoBehaviour
         if (mines > 0)
         {
             // Reccursive, run until all mines have been placed. Fires if a cell already contains a bomb.
-            CreateMines(mines);
+            CreateMines(tiles, mines, rows, cols);
         }
     }
 
-    public void GenerateNumbers()
+    public void GenerateNumbers(GameObject[,] tiles, int rows, int cols)
     {
-        for (int x = 0; x < columns; x++)
+        for (int x = 0; x < cols; x++)
         {
             for (int y = 0; y < rows; y++)
             {
@@ -85,7 +62,7 @@ public class GenerateBoard : MonoBehaviour
                         var i = x + xoff;
                         var j = y + yoff;
 
-                        if (i > -1 && i < columns && j > -1 && j < rows)
+                        if (i > -1 && i < cols && j > -1 && j < rows)
                         {
                             var neighbour = tiles[i, j];
                             if (neighbour.GetComponent<TileStates>().IsBomb)
