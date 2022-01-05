@@ -13,6 +13,11 @@ public class CheckTile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RayCastCell();
+    }
+
+    private void RayCastCell()
+    {
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             // Check which object is being clicked on
@@ -23,24 +28,7 @@ public class CheckTile : MonoBehaviour
             {
                 if (hit.transform.name.Contains("Tile"))
                 {
-                    // Check each child object of tile and turn on the correct state
-                    var states = hit.transform.GetComponent<TileStates>();
-                    foreach (Transform child in hit.transform)
-                    {
-                        // Dont execute if tile has been marked with a flag
-                        if (states.IsBomb && !states.IsFlag && child.tag == "Bomb")
-                        {
-                            child.gameObject.SetActive(true);
-                            break;
-                        }
-
-                        if (!states.IsBomb && !states.IsFlag && child.tag == "Number")
-                        {
-                            child.GetComponent<TextMesh>().text = states.TotalBombs.ToString();
-                            child.gameObject.SetActive(true);
-                            break;
-                        }
-                    }
+                    hit.transform.GetComponent<ITile>().Reveal();
                 }
             }
         }

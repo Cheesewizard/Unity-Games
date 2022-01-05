@@ -23,25 +23,13 @@ public class GameBoard : MonoBehaviour, IGameBoard
 
     public void CreateMines(GameObject[,] tiles, int mines, int rows, int cols)
     {
+        // This implementation could try too add a bomb to the same tile resulting in incorect number of bombs placed
         for (int x = 0; x < mines; x++)
         {
             var col = Random.Range(0, cols);
             var row = Random.Range(0, rows);
 
-            if (tiles[col, row].GetComponent<TileStates>().IsBomb)
-            {
-                break;
-            }
-
-            mines--;
-            tiles[col, row].GetComponent<TileStates>().IsBomb = true;
-            //Instantiate(bomb, new Vector3(tiles[col, row].transform.position.x, tiles[col, row].transform.position.y, -5), Quaternion.Euler(-90, 0, 0));
-        }
-
-        if (mines > 0)
-        {
-            // Reccursive, run until all mines have been placed. Fires if a cell already contains a bomb.
-            CreateMines(tiles, mines, rows, cols);
+            tiles[col, row].AddComponent<Bomb>();
         }
     }
 
@@ -51,7 +39,7 @@ public class GameBoard : MonoBehaviour, IGameBoard
         {
             for (int y = 0; y < rows; y++)
             {
-                var total = 0;
+                var bombTotal = 0;
 
                 // Check neighbours
                 for (int xoff = -1; xoff <= 1; xoff++)
@@ -65,21 +53,20 @@ public class GameBoard : MonoBehaviour, IGameBoard
                         if (i > -1 && i < cols && j > -1 && j < rows)
                         {
                             var neighbour = tiles[i, j];
-                            if (neighbour.GetComponent<TileStates>().IsBomb)
+                            if (neighbour.GetComponent<ITile>()?.GetType() == typeof(Bomb))
                             {
-                                total++;
+                                bombTotal++;
                             }
                         }
                     }
                 }
 
-                if (!tiles[x, y].GetComponent<TileStates>().IsBomb)
+                if (tiles[x, y].GetComponent<ITile>()?.GetType() != typeof(Bomb))
                 {
+                    var number = tiles[x, y].AddComponent<Number>();
+
                     // Assign text to amount of nearby bombs
-                    tiles[x, y].GetComponent<TileStates>().TotalBombs = total;
-                    //number.GetComponent<TextMesh>().text = total.ToString();
-                    total = 0;
-                    //Instantiate(number, new Vector3(tiles[x, y].transform.position.x, tiles[x, y].transform.position.y, -5), Quaternion.Euler(0, 0, 0));
+                    number.SetNumberOfBombsText(bombTotal, tiles[x, y]);
                 }
             }
         }

@@ -27,7 +27,7 @@ public class SetFlag : MonoBehaviour
                 if (hit.transform.name.Contains("Tile"))
                 {
                     // Check each child object of tile and turn on the correct state
-                    var states = hit.transform.GetComponent<TileStates>();
+                    var states = hit.transform.GetComponent<TileState>();
                     foreach (Transform child in hit.transform)
                     {
                         // Dont execute if tile has been marked with a flag

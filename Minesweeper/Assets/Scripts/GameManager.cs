@@ -31,9 +31,11 @@ public class GameManager : MonoBehaviour
         tiles = gameBoard.CreateBoard(tile, width, rows, columns, start_x, start_y);
         gameBoard.CreateMines(tiles, minesTotal, rows, columns);
         gameBoard.GenerateNumbers(tiles, rows, columns);
-        // camera.CentreCamera(cameraObject, rows, columns, width);
+        camera.CentreCamera(cameraObject, rows, columns, width);
 
-       // gameBoard.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, Camera.main.nearClipPlane));
+        // gameBoard.transform.position = 
+
+        tiles[5, 5].transform.position = new Vector3(tiles[5, 5].transform.position.x, tiles[5, 5].transform.position.y, -100);
     }
 
     private float MapWidthDefaultValue(float width)
