@@ -133,9 +133,9 @@ GameObject:
   m_Component:
   - component: {fileID: 371188417}
   - component: {fileID: 371188416}
-  - component: {fileID: 371188419}
-  - component: {fileID: 371188418}
   - component: {fileID: 371188420}
+  - component: {fileID: 371188418}
+  - component: {fileID: 371188419}
   m_Layer: 0
   m_Name: GameBoard
   m_TagString: Untagged
@@ -178,33 +178,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 371188415}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8ce6f28f49372e42a329ca6d97d5dc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &371188419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 371188415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7e639479603d1a4a95553481516836d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ignore:
-    serializedVersion: 2
-    m_Bits: 64
---- !u!114 &371188420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 371188415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5e632e2a9893064c97e296389b66579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -214,6 +187,30 @@ MonoBehaviour:
   minesTotal: 10
   tile: {fileID: 2726352783880289574, guid: a446802d21271f54c997bfdfec1132ef, type: 3}
   cameraObject: {fileID: 963194225}
+--- !u!114 &371188419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371188415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d2876d915bfaaf49b5b71da79e02317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &371188420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371188415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ece3d57002c1ee4a8242adb0f6b4df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +342,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.75800997, g: 0.9622642, b: 0.76403785, a: 0}
+  m_BackGroundColor: {r: 0.12175152, g: 0.14364542, b: 0.1509434, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -362,7 +359,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -386,7 +383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 7, y: 7, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
