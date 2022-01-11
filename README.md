@@ -12,7 +12,7 @@ A folder for storing games which I will re-create to practice my c# and unity kn
 **Minesweeper**
 
 ![image](https://user-images.githubusercontent.com/9462056/148981495-88508fb9-416d-46d6-9b83-68218c0044a4.png)
-![ezgif com-gif-maker](https://user-images.githubusercontent.com/9462056/148984485-d5e78544-e45e-422c-9ca7-2c93bb06b82d.gif)
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/9462056/148986622-d5334e59-f8d5-47a8-a0e2-475d9762a051.gif)
 
 
 **Tetris**
