@@ -10,8 +10,9 @@ A folder for storing games which I will re-create to practice my c# and unity kn
 
 
 **Minesweeper**
+![image](https://user-images.githubusercontent.com/9462056/148981495-88508fb9-416d-46d6-9b83-68218c0044a4.png)
+https://user-images.githubusercontent.com/9462056/148981240-f92a7e55-2a04-4b08-9084-f3cf7ddca70c.mp4
 
-![Minesweeper](https://user-images.githubusercontent.com/9462056/148477275-3decb269-4092-486f-8a2c-b25fc62ac888.png)
 
 
 **Tetris**
