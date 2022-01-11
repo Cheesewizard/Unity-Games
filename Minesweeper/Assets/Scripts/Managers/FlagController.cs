@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class FlagController : MonoBehaviour, IFlag
 {
-    private void SetFlag(GameObject tile)
+    private void SetFlag(GameObject selectedTile)
     {
-        tile.AddComponent<Flag>();
+        var tile = selectedTile.GetComponent<ITile>();
+
+        if (tile != null)
+        {
+            if (!tile.IsRevealed)
+            {
+                selectedTile.AddComponent<Flag>();
+            }
+        }
     }
 
-    private void RemoveFlag(GameObject tile)
+    public void RemoveFlag(GameObject tile)
     {
         Destroy(tile.GetComponent<Flag>());
     }

@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Bomb : MonoBehaviour, ITile
+public class Bomb : MonoBehaviour, ITile, IBomb
 {
+    public bool IsRevealed { get; set; }
+
     public void Reveal()
     {
+        IsRevealed = true;
         var renderer = GetComponent<Renderer>();
         var materials = renderer.materials;
 

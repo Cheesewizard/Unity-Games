@@ -15,9 +15,10 @@ public class GameBoard : MonoBehaviour, IGameBoard
                 var posx = x * width;
                 var posy = y * width;
                 tiles[x, y] = Instantiate(tile, new Vector3(start_x + posx, -start_y + posy), Quaternion.Euler(90, 0, 180));
+                tiles[x, y].AddComponent<IndexPosition>().SetPostion(x, y);
             }
         }
-
+        
         return tiles;
     }
 

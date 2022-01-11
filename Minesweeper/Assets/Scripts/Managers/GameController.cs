@@ -1,35 +1,82 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Interfaces;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public int columns;
-    public int rows;
-    public float width = 1;
+    public static GameController Instance { get; private set; }
 
-    private int start_x, start_y;
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
+    //private int _columns;
+    //public int columns
+    //{
+    //    get { return columns; }   
+    //    set { if (_columns > 50) { _columns = 50; } }  
+    //}
+
+    //private int _rows;
+    //public int rows
+    //{
+    //    get { return rows; }
+    //    set { if (_rows > 50) { _rows = 50; } }
+    //}
+
+    public int columns, rows;
+
+
+    public float width = 1;
     public int minesTotal = 1;
 
     public GameObject tile;
-    public GameObject[,] tiles;
+    public GameObject[,] gameTiles;
     public GameObject cameraObject;
- 
+
+    private ILose lose;
+    private IWin win;
+
     // Start is called before the first frame update
     void Start()
     {
         width = MapWidthDefaultValue(width);
+        CheckBoardSize();
 
         camera = cameraObject.GetComponent<ICamera>();
-        gameBoard = this.GetComponent<IGameBoard>();
+        gameBoard = GetComponent<IGameBoard>();
 
         // Generate board
-        tiles = gameBoard.CreateBoard(tile, width, rows, columns, start_x, start_y);
-        gameBoard.CreateMines(tiles, minesTotal, rows, columns);
-        gameBoard.GenerateNumbers(tiles, rows, columns);
+        gameTiles = gameBoard.CreateBoard(tile, width, rows, columns, start_x, start_y);
+        gameBoard.CreateMines(gameTiles, minesTotal, rows, columns);
+        gameBoard.GenerateNumbers(gameTiles, rows, columns);
 
         // Camera
         camera.CentreCamera(cameraObject, rows, columns, width);
+
+        lose = new Lose();
+        win = new Win();
+    }
+
+    // Sanity check to avoid stack overflow exception with high tile values. Could be improved to allow huge games by using a flyweight pattern.
+    private void CheckBoardSize()
+    {
+        if (columns > 50)
+        {
+            columns = 50;
+        }
+
+        if (rows > 50)
+        {
+            rows = 50;
+        }
     }
 
     private float MapWidthDefaultValue(float width)
@@ -49,7 +96,34 @@ public class GameController : MonoBehaviour
         start_y = columns / 2;
     }
 
+    public void CheckAllTilesAreRevealed()
+    {
+        for (int x = 0; x < columns; x++)
+        {
+            for (int y = 0; y < rows; y++)
+            {
+                var gameTile = gameTiles[x, y].GetComponent<ITile>();
+                if (gameTile.GetType() == typeof(Number))
+                {
+                    if (!gameTile.IsRevealed)
+                    {
+                        // Still tiles yet to reveal
+                        return;
+                    }
+                }
+            }
+        }
+
+        win.Success();
+    }
+
+    public void GameOver()
+    {
+        lose.Failure();
+    }
+
 
     private ICamera camera;
     private IGameBoard gameBoard;
+    private int start_x, start_y;
 }

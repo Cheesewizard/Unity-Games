@@ -133,9 +133,9 @@ GameObject:
   m_Component:
   - component: {fileID: 371188417}
   - component: {fileID: 371188416}
-  - component: {fileID: 371188420}
   - component: {fileID: 371188418}
   - component: {fileID: 371188419}
+  - component: {fileID: 371188420}
   m_Layer: 0
   m_Name: GameBoard
   m_TagString: Untagged
