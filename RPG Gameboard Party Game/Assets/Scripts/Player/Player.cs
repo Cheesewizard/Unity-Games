@@ -7,22 +7,25 @@ public class Player : MonoBehaviour
     private int routePosition;
     private bool isMoving = false;
 
-    public int steps;
+    [SerializeField]
+    private int steps;
   
     public float speed = 8f;
 
     //Events
     public Action<bool> PlayerMoving;
-
+    public Action<int> PlayerSteps;
 
     private void OnEnable()
     {
         PlayerMoving += GameManager.Instance.StartDice;
+        PlayerSteps += UIManager.Instance.UpdateMovement;
     }
 
     private void OnDisable()
     {
         PlayerMoving -= GameManager.Instance.StartDice;
+        PlayerSteps -= UIManager.Instance.UpdateMovement;
     }
 
 
@@ -55,20 +58,23 @@ public class Player : MonoBehaviour
 
         while (steps > 0)
         {
+            PlayerSteps?.Invoke(steps);
+
             routePosition++;
             routePosition %= GameManager.Instance.currentRoute.childNodesList.Count;
-
+           
             var nextPos = GameManager.Instance.currentRoute.childNodesList[routePosition].position;
             while (MoveToNextNode(nextPos))
             {
                 yield return null;
             }
-
+            
             yield return new WaitForSeconds(0.1f);
             steps--;
         }
 
         isMoving = false;
+        PlayerSteps?.Invoke(steps);
         PlayerMoving?.Invoke(false);
     }
 
