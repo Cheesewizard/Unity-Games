@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2541154464119065639}
   - component: {fileID: 2541154464119065638}
-  - component: {fileID: 4840061119220861294}
+  - component: {fileID: 2243156427135257207}
+  - component: {fileID: 3784056579003560893}
   m_Layer: 0
   m_Name: Dice
   m_TagString: Untagged
@@ -47,9 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinSpeed: 1
-  axis: {x: 150, y: 300, z: 300}
+  axis: {x: 150, y: -300, z: 300}
   rotate: 1
---- !u!114 &4840061119220861294
+--- !u!114 &2243156427135257207
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,12 +59,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 2541154464119065633}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e94a31ff771464faf406cbe66a3d1c, type: 3}
+  m_Script: {fileID: 11500000, guid: 68ed36a7b775478e95f94dc672e45830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitBlock: {fileID: 2541154464645277053}
-  diceEffect: {fileID: 2414354131847744212}
-  diceRotate: {fileID: 2541154464119065638}
+--- !u!114 &3784056579003560893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2541154464119065633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c48abcdb784f969d088b8115403165, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _diceHitEffect: {fileID: 9037253456992760679, guid: e6e58322bd4873d43aa5c721d814f44e, type: 3}
+  _diceIdleEffect: {fileID: 4758446043350958467, guid: b8434a0112d6ee54197c391ddaaf0b2a, type: 3}
 --- !u!1 &5530302306092176867
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,6 +128,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -124,7 +137,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cbff638bf8da3fd4e802669397794885, type: 2}
+  - {fileID: 2100000, guid: e8b5b628a7df3304ea784f49f8d5f3d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -186,12 +199,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
-  - {fileID: 2543610530826581454}
-  - {fileID: 2541154464664674365}
+  - {fileID: 9169416239288641298}
+  - {fileID: 1654587158155110770}
   m_Father: {fileID: 2541154464119065639}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &6785016603012306458
+--- !u!1001 &156088181105496373
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -200,7 +213,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9037253456973362727, guid: e6e58322bd4873d43aa5c721d814f44e, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9037253456973362727, guid: e6e58322bd4873d43aa5c721d814f44e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -244,21 +257,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9037253456973720071, guid: e6e58322bd4873d43aa5c721d814f44e, type: 3}
       propertyPath: m_Name
-      value: Dice Hit
+      value: Dice Hit Effect
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6e58322bd4873d43aa5c721d814f44e, type: 3}
---- !u!4 &2541154464664674365 stripped
+--- !u!4 &9169416239288641298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9037253456973362727, guid: e6e58322bd4873d43aa5c721d814f44e, type: 3}
-  m_PrefabInstance: {fileID: 6785016603012306458}
+  m_PrefabInstance: {fileID: 156088181105496373}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &2541154464645277053 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 9037253456992760679, guid: e6e58322bd4873d43aa5c721d814f44e, type: 3}
-  m_PrefabInstance: {fileID: 6785016603012306458}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &7172236658283383639
+--- !u!1001 &6211054536708741099
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -267,7 +275,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4666960050900205209, guid: b8434a0112d6ee54197c391ddaaf0b2a, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4666960050900205209, guid: b8434a0112d6ee54197c391ddaaf0b2a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -311,17 +319,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4669552148921115129, guid: b8434a0112d6ee54197c391ddaaf0b2a, type: 3}
       propertyPath: m_Name
-      value: Dice Effect
+      value: Dice Idle Effect
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8434a0112d6ee54197c391ddaaf0b2a, type: 3}
---- !u!4 &2543610530826581454 stripped
+--- !u!4 &1654587158155110770 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4666960050900205209, guid: b8434a0112d6ee54197c391ddaaf0b2a, type: 3}
-  m_PrefabInstance: {fileID: 7172236658283383639}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &2414354131847744212 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4758446043350958467, guid: b8434a0112d6ee54197c391ddaaf0b2a, type: 3}
-  m_PrefabInstance: {fileID: 7172236658283383639}
+  m_PrefabInstance: {fileID: 6211054536708741099}
   m_PrefabAsset: {fileID: 0}

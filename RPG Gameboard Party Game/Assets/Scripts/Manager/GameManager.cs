@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using States.Player;
 using UnityEngine;
 using UnityEngine.Scripting;
 
@@ -21,8 +22,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    [SerializeReference]
-    public List<IDice> dices;
+    public List<IDice> dices = new List<IDice>();
+    private List<IPlayer> playerCount = new List<IPlayer>();
     public Route currentRoute;
 
     // Start is called before the first frame update
@@ -35,6 +36,24 @@ public class GameManager : MonoBehaviour
 
     // Move
 
+
+    public void PlayerSetup(IPlayer player)
+    {
+        playerCount.Add(player); // Probably doesnt do anything
+        // Character Positions
+        // Character turn order
+        //InventorySetup(player);
+    }
+
+    private void InventorySetup(IPlayer player)
+    {
+        //InventoryManager.Instance.AddInventory(player.playerId, new Inventory());
+    }
+
+    //public void ActivateTile(tile)
+    //{
+    //    currentRoute[tile].
+    //}
 
     public void AddDice(IDice dice)
     {

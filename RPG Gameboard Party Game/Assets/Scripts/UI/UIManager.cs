@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -21,16 +19,30 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public TextMeshPro userInterface;
+    public TextMeshPro playerSteps;
+    public TextMeshPro playerCoins;
+
+    private string MoneyHeader = "Coins: ";
 
     public void UpdateMovement(int stepsLeft)
     {
         if (stepsLeft <= 0)
         {
-            userInterface.text = null;
+            playerSteps.text = null;
             return;
         }
 
-        userInterface.text = stepsLeft.ToString();
+        playerSteps.text = stepsLeft.ToString();
+    }
+
+    public void UpdateMoney(int money)
+    {
+        if (money <= 0)
+        {
+            playerCoins.text = $"{MoneyHeader}{0}";
+            return;
+        }
+
+        playerCoins.text = $"{MoneyHeader}{money}";
     }
 }
