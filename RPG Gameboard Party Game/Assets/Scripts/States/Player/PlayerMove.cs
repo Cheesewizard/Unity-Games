@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using States.GameBoard;
 using UnityEngine;
 
@@ -11,9 +12,6 @@ namespace States.Player
         private int _routePosition;
         private MovePlayerToTile _movePlayerPosition;
 
-        private GameObject _currentPlayer;
-
-
         public PlayerMove(GameBoardSystem gameSystem) : base(gameSystem)
         {
         }
@@ -21,20 +19,19 @@ namespace States.Player
         public override IEnumerator Enter()
         {
             Debug.Log("Entered Move Character");
-
-            _currentPlayer = gameSystem.players[gameSystem.turnManager.CurrentPlayer()].gameObject;
-            _routePosition = gameSystem.playerManager.GetPlayerPosition(_currentPlayer.GetComponent<PlayerId>().Id);
-            
-            _movePlayerPosition = _currentPlayer.GetComponent<MovePlayerToTile>();
-
-            // Total the value of all the dice and add to amount of steps able to take
-            foreach (var diceNumber in gameSystem.diceNumbers)
-            {
-                _steps += diceNumber;
-            }
+            Init();
 
             gameSystem.StartCoroutine(Move());
             yield return null;
+        }
+
+        private void Init()
+        {
+            _routePosition = gameSystem.playerData.PositionIndex;
+            _movePlayerPosition = gameSystem.playerData.Player.GetComponent<MovePlayerToTile>();
+
+            // Total the value of all the dice and add to amount of steps able to take
+            _steps = gameSystem.diceNumbers.Sum();
         }
 
         public override IEnumerator Exit()
@@ -45,7 +42,7 @@ namespace States.Player
 
         public override void Tick()
         {
-            // remove if unused   
+            gameSystem.cameraManager.ZoomOut(); 
         }
 
         private IEnumerator Move()
@@ -77,23 +74,20 @@ namespace States.Player
             }
 
             _isMoving = false;
-            UpdatePlayerPosition(_currentPlayer.GetComponent<PlayerId>(), _routePosition);
-            
-            
+            UpdatePlayerPosition(gameSystem.playerData.PlayerId, _routePosition);
+
+
             //PlayerSteps?.Invoke(steps);
             //PlayerMoving?.Invoke(false);
-            gameSystem.StartCoroutine(TransitionToState(1));
+            gameSystem.StartCoroutine(gameSystem.TransitionToState(1, new GameTile(gameSystem)));
         }
 
-        private void UpdatePlayerPosition(IPlayer player, int routePosition)
+        private void UpdatePlayerPosition(int playerId, int routePosition)
         {
-            gameSystem.playerManager.UpdatePlayerPosition(player.Id ,routePosition);
+            gameSystem.playerData.PositionIndex = routePosition;
+            gameSystem.playerManager.UpdatePlayerData(playerId, gameSystem.playerData);
         }
 
-        private IEnumerator TransitionToState(int timeToWait)
-        {
-            yield return new WaitForSeconds(timeToWait);
-            gameSystem.SetState(new GameTile(gameSystem));
-        }
+
     }
 }

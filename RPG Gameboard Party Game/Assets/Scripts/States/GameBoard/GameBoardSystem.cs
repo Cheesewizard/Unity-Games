@@ -1,4 +1,7 @@
-﻿using States.Player;
+﻿using System.Collections;
+using Camera;
+using GameBoard.Dice;
+using States.Player;
 using UnityEngine;
 
 namespace States.GameBoard
@@ -7,11 +10,11 @@ namespace States.GameBoard
     {
         // Game Board
         public Route currentRoute;
-        public GameObject currentTile;
+        [HideInInspector] public GameObject currentTile;
 
         // Dice
         public GameObject[] dice;
-        public int[] diceNumbers;
+        [HideInInspector] public int[] diceNumbers;
 
         // Movement / Players
         public GameObject[] players;
@@ -21,29 +24,42 @@ namespace States.GameBoard
         // Turn Order
         public TurnManager turnManager;
 
+        // Dice
+        public DiceManager diceManager;
+
+        // Cameras
+        public GameObject[] cameras;
+        public CameraManager cameraManager;
+
+        // Data
+        [HideInInspector] public PlayerData playerData;
+
         private void Awake()
         {
-            
-            // Set player id - Needs changing later
-            for (var i = 0; i < players.Length; i++)
-            {
-                players[i].GetComponent<PlayerId>().Id = i;
-            }
-            
             diceNumbers = new int[dice.Length];
             turnManager = new TurnManager(true, players.Length, 10);
             playerManager = new PlayerManager(players);
+            cameraManager = new CameraManager(cameras);
+            diceManager = new DiceManager(dice);
+            
+            playerData = playerManager.GetPlayerDataFromPlayerIndex(0);
         }
 
         public void Start()
         {
-            currentState = new Player.Player(this);
+            currentState = new StartTurn(this);
             SetState(currentState);
         }
 
         void Update()
         {
             currentState.Tick();
+        }
+        
+        public IEnumerator TransitionToState(float timeToWait, GameStates state)
+        {
+            yield return new WaitForSeconds(timeToWait);
+            SetState(state);
         }
     }
 }

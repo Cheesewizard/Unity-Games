@@ -1,49 +1,95 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using States.Player;
 using UnityEngine;
 
 public class PlayerManager
 {
-    public Dictionary<int, int> PlayerPosition = new Dictionary<int, int>();
+    public Dictionary<int, PlayerData> PlayerDataDict = new Dictionary<int, PlayerData>();
 
-    public PlayerManager(IEnumerable<GameObject> players)
+    private GameObject[] _players;
+    private PlayerData _playerData;
+
+    public PlayerManager(GameObject[] players)
     {
-        foreach (var player in players)
+        _players = players;
+        Init();
+    }
+
+    private void Init()
+    {
+        // Set player id - Needs changing later
+        for (var i = 0; i < _players.Length; i++)
         {
-            var playerid = player.GetComponent<PlayerId>();
-            AddPlayers(playerid.Id);
+            var playerId = _players[i].GetComponent<PlayerId>();
+            playerId.Id = i;
+
+            AddPlayer(playerId.Id, _players[i].gameObject);
         }
     }
 
-    private void AddPlayers(int playerId)
+    private void AddPlayer(int playerId, GameObject player)
     {
-        if (PlayerPosition.ContainsKey(playerId))
+        if (PlayerDataDict.ContainsKey(playerId))
         {
             return;
         }
 
-        // Everyone starts at route position 0
-        PlayerPosition.Add(playerId, 0);
+        var data = new PlayerData()
+        {
+            PlayerId = playerId,
+            Player = player,
+            PositionIndex = 0,
+            Inventory = new Inventory()
+        };
+
+        PlayerDataDict.Add(playerId, data);
     }
 
     public void RemovePlayer(int playerId)
     {
-        if (PlayerPosition.ContainsKey(playerId))
+        if (PlayerDataDict.ContainsKey(playerId))
         {
-            PlayerPosition.Remove(playerId);
+            PlayerDataDict.Remove(playerId);
         }
     }
 
-    public void UpdatePlayerPosition(int playerId, int playerposition)
+    public void UpdatePlayerData(int playerId, PlayerData data)
     {
-        if (PlayerPosition.ContainsKey(playerId))
+        if (PlayerDataDict.ContainsKey(playerId))
         {
-            PlayerPosition[playerId] = playerposition;
+            PlayerDataDict[playerId] = data;
         }
     }
 
-    public int GetPlayerPosition(int playerId)
+    public PlayerData GetPlayerData(int playerId)
     {
-        return !PlayerPosition.ContainsKey(playerId) ? 0 : PlayerPosition[playerId];
+        return !PlayerDataDict.ContainsKey(playerId) ? new PlayerData() : PlayerDataDict[playerId];
+    }
+
+    public int GetPlayerIdFromPlayerIndex(int currentPlayerIndex)
+    {
+        for (var i = 0; i < _players.Length; i++)
+        {
+            if (i == currentPlayerIndex)
+            {                
+               return _players[i].GetComponent<PlayerId>().Id;
+            }
+        }
+
+        return -1;
+    }
+    
+    public PlayerData GetPlayerDataFromPlayerIndex(int index)
+    {
+        for (var i = 0; i < _players.Length; i++)
+        {
+            if (i == index)
+            {                
+                return PlayerDataDict.ElementAt(index).Value;
+            }
+        }
+
+        return new PlayerData();
     }
 }

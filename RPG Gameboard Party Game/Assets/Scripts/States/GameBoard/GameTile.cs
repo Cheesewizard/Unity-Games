@@ -22,7 +22,7 @@ namespace States.GameBoard
                 tileEffect.ActivateTile();
             }
             
-            gameSystem.StartCoroutine(TransitionToState(1));
+            gameSystem.StartCoroutine(gameSystem.TransitionToState(1, new EndTurn(gameSystem)));
             yield return null;
         }
 
@@ -31,10 +31,9 @@ namespace States.GameBoard
             yield return null;
         }
 
-        private IEnumerator TransitionToState(int timeToWait)
+        public override void Tick()
         {
-            yield return new WaitForSeconds(timeToWait);
-            gameSystem.SetState(new NextPlayer(gameSystem));
+            gameSystem.cameraManager.ZoomIn();
         }
     }
 }

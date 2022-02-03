@@ -11,7 +11,7 @@ namespace States.Player
         }
         
         public override IEnumerator Enter()
-        { 
+        {
             Debug.Log("Entered Player Start");
             yield return null;
         }
@@ -27,7 +27,7 @@ namespace States.Player
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("Press Button For Dice");
-                gameSystem.SetState(new Dice.Dice(gameSystem));
+                gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new Dice.Dice(gameSystem)));
                 return;
             }
 
@@ -35,14 +35,14 @@ namespace States.Player
             {
                 Debug.Log("Press Button For Items");
                 //gameSystem.SetState(new Dice(gameSystem));
-            }
+            }  
             
-        }
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                Debug.Log("Press Button For Look At Game Board Camera");
+                gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new LookAtGameBoard(gameSystem)));
+            }
 
-        private IEnumerator TransitionToState(int timeToWait)
-        {
-            yield return new WaitForSeconds(timeToWait);
-            gameSystem.SetState(new PlayerMove(gameSystem));
         }
     }
 }

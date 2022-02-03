@@ -29,18 +29,14 @@ namespace States.Dice
         //     DiceIsHit -= DiceAudioManager.Instance.PlayDiceHitSound;
         // }
 
-        // private void Start()
-        // {
-        //     GameManager.Instance.AddDice(this);
-        //     diceRotate = GetComponent<RotateSelf>();
-        // }
-
         public override IEnumerator Enter()
-        {
+        { 
+            gameSystem.diceManager.MoveDiceToTarget(gameSystem.playerData.Player.transform);
+            
             foreach (var die in gameSystem.dice)
             {
-                die.SetActive(true);
-                die.GetComponentInChildren<AnimateDice>().rotate = true;
+                die.transform.parent.gameObject.SetActive(true);
+                die.GetComponent<AnimateDice>().rotate = true;
             }
 
             yield return null;
@@ -50,7 +46,7 @@ namespace States.Dice
         {
             foreach (var die in gameSystem.dice)
             {
-                die.SetActive(false);
+                die.transform.parent.gameObject.SetActive(false);
             }
 
             yield return null;
@@ -61,7 +57,7 @@ namespace States.Dice
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("Exit Dice Option");
-                gameSystem.SetState(new Player.Player(gameSystem));
+                gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new Player.Player(gameSystem)));
                 return;
             }
             
@@ -70,17 +66,11 @@ namespace States.Dice
                 Debug.Log("Hello from the dice hit");
                 PlayParticleEffect();
                 SetDiceNumber();
-                gameSystem.StartCoroutine(TransitionToState(1));
+                gameSystem.StartCoroutine(gameSystem.TransitionToState(1f, new PlayerMove(gameSystem)));
             }
             
         }
-
-        private IEnumerator TransitionToState(int timeToWait)
-        {
-            yield return new WaitForSeconds(timeToWait);
-            gameSystem.SetState(new PlayerMove(gameSystem));
-        }
-
+        
         private void SetDiceNumber()
         {
             for (var i = 0; i < gameSystem.dice.Length; i++)
