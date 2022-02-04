@@ -1,11 +1,16 @@
+using States.Player;
 using UnityEngine;
 
-public class AddMoney : MonoBehaviour, ITile
+namespace GameBoard.Tiles
 {
-    public void ActivateTile()
+    public class AddMoney : MonoBehaviour, ITile
     {
-       // Add money
-       Debug.Log("Add 3 coins");
+        public PlayerData ActivateTile(PlayerData playerData)
+        {
+            // Add money
+            Debug.Log("Add 3 coins");
+            playerData.Inventory.AddCoins(3);
+            return playerData;
+        }
     }
-    
 }

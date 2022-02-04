@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
+using States.Player.Inventory;
 using UnityEngine;
 
+[Obsolete]
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance { get; private set; }

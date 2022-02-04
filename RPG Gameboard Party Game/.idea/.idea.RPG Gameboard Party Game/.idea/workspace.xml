@@ -2,92 +2,47 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c29203e5-3e5e-4452-bcfa-8c28d0679445" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Camera.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraEnum.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraEnum.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraManager.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/FollowPlayer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/FollowPlayer.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Dice/DiceManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Dice/DiceManager.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Helpers/MoveTransform.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Helpers/MoveTransform.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/EndTurn.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/LookAtGameBoard.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/LookAtGameBoard.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/StartTurn.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/StartTurn.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/PlayerData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/PlayerData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Players.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Players/Materials.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Players/Materials/Blue.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Players/Materials/Blue.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Players/Materials/DarkGray.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Players/Materials/DarkGray.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Items.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Items/ArmourEnum.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Items/ArmourEnum.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Items/AttackCardEnum.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Items/AttackCardEnum.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Items/ItemEnum.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Items/ItemEnum.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Items/MagicCardEnum.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Items/MagicCardEnum.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Items/WeaponEnum.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Items/WeaponEnum.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/GameboardAudioManger.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/GameboardAudioManger.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RPG Gameboard Party Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RPG Gameboard Party Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/Assets.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/Assets/CFX3_T_Ground.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/Assets/CFX3_T_Ground.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/Assets/CFXFree_Demo_Ground.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/Assets/CFXFree_Demo_Ground.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/Assets/CFX_AutoStopLoopedEffect.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/Assets/CFX_AutoStopLoopedEffect.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/Assets/CFX_Demo_New.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/Assets/CFX_Demo_New.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/Assets/CFX_Demo_RandomDir.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/Assets/CFX_Demo_RandomDir.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/Assets/CFX_Demo_RandomDirectionTranslate.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/Assets/CFX_Demo_RandomDirectionTranslate.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/Assets/CFX_Demo_RotateCamera.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/Assets/CFX_Demo_RotateCamera.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/Assets/CFX_Demo_Translate.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/Assets/CFX_Demo_Translate.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/CFX Free Demo.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/CFX Free Demo.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX Demo Btn Arrow R.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX Demo Btn Arrow R.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX Demo Btn Arrow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX Demo Btn Arrow.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX Demo Btn Camera H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX Demo Btn Camera H.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX Demo Btn Camera.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX Demo Btn Camera.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX Demo Btn Ground H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX Demo Btn Ground H.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX Demo Btn Ground.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX Demo Btn Ground.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX Demo Btn SlowMo H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX Demo Btn SlowMo H.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX Demo Btn SlowMo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX Demo Btn SlowMo.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX1 Demo Logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX1 Demo Logo.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX2 Demo Logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX2 Demo Logo.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX3 Demo Logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX3 Demo Logo.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX4 Demo Logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFX4 Demo Logo.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFXFree Demo Logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/Cartoon FX/Demo/UI Canvas/CFXFree Demo Logo.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameBoard.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameBoard.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inventory.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/Inventory.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inventory/IInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/Inventory/IInventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inventory/IInventory.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/Inventory/IInventory.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inventory/Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/Inventory/Inventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inventory/Inventory.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/Inventory/Inventory.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inventory/InventoryManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/Inventory/InventoryManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inventory/InventoryManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/Inventory/InventoryManager.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Dice/Dice.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Dice/Dice.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameBoard/GameboardAudioManger.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameBoard/GameboardAudioManger.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Tiles/AddMoney.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Tiles/AddMoney.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Tiles/ITile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Tiles/ITile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Tiles/RemoveMoney.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Tiles/RemoveMoney.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Manager/GameManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Manager/GameManager.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/GameBoardSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/GameBoardSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/GameStates.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/GameStates.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/GameTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/GameTile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/StateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/StateMachine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Player/NextPlayer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Player/NextPlayer.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/EndTurn.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Player/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/LookAtGameBoard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/LookAtGameBoard.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/StartTurn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/GameBoard/StartTurn.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Player/AddPlayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/AddPlayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Player/Inventory/IInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/Inventory/IInventory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Player/Inventory/Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/Inventory/Inventory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Player/Inventory/InventoryManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/Inventory/InventoryManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Player/MovePlayerToTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/MovePlayerToTile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Player/PlayerData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/PlayerData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Player/PlayerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/PlayerManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Player/PlayerMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Player/PlayerMove.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,10 +59,15 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a104889781c465ca00c12d0953583e2143c00/a0/1fe06896/UnitySynchronizationContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a104889781c465ca00c12d0953583e2143c00/b0/c5a325d0/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/695d1cc93cca45069c528c15c9fdd7493e2800/67/fc0f0eed/GenericEqualityComparer`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/695d1cc93cca45069c528c15c9fdd7493e2800/ad/2bf2a14c/Int32.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a104889781c465ca00c12d0953583e2143c00/5c/522af8a9/SetupCoroutine.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/695d1cc93cca45069c528c15c9fdd7493e2800/d9/26b05c77/IntPtr.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/695d1cc93cca45069c528c15c9fdd7493e2800/fe/212605da/Dictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b1975b22174b431289ec9891624e4df37000/96/6e5b4971/Input.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a104889781c465ca00c12d0953583e2143c00/6e/768f4f1b/Random.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/695d1cc93cca45069c528c15c9fdd7493e2800/0a/cc503fc6/NullReferenceException.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a104889781c465ca00c12d0953583e2143c00/c0/5cd088c7/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -162,7 +122,7 @@
       <option name="presentableId" value="Default" />
       <updated>1643843353649</updated>
       <workItem from="1643843361266" duration="817000" />
-      <workItem from="1643844557304" duration="52824000" />
+      <workItem from="1643844557304" duration="64643000" />
     </task>
     <servers />
   </component>
@@ -188,111 +148,51 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/States/GameBoard/GameStates.cs</url>
-          <line>26</line>
-          <properties documentPath="W:\Programming\Unity\Unity-Games\RPG Gameboard Party Game\Assets\Scripts\States\GameStateMachine.cs" initialLine="26" containingFunctionPresentation="method 'Tick'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/GameBoard/Tiles/AddMoney.cs</url>
+          <line>13</line>
+          <properties documentPath="W:\Programming\Unity\Unity-Games\RPG Gameboard Party Game\Assets\Scripts\GameBoard\Tiles\AddMoney.cs" initialLine="13" containingFunctionPresentation="method 'ActivateTile'">
             <startOffsets>
-              <option value="493" />
+              <option value="344" />
             </startOffsets>
             <endOffsets>
-              <option value="505" />
+              <option value="345" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="15" />
+          <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/States/GameBoard/GameStates.cs</url>
-          <line>20</line>
-          <properties documentPath="W:\Programming\Unity\Unity-Games\RPG Gameboard Party Game\Assets\Scripts\States\GameStateMachine.cs" initialLine="20" containingFunctionPresentation="method 'Exit'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/GameBoard/Tiles/RemoveMoney.cs</url>
+          <line>9</line>
+          <properties documentPath="W:\Programming\Unity\Unity-Games\RPG Gameboard Party Game\Assets\Scripts\GameBoard\Tiles\RemoveMoney.cs" initialLine="9" containingFunctionPresentation="method 'ActivateTile'">
             <startOffsets>
-              <option value="403" />
+              <option value="211" />
             </startOffsets>
             <endOffsets>
-              <option value="404" />
+              <option value="239" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="16" />
+          <option name="timeStamp" value="79" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/States/GameBoard/GameStates.cs</url>
-          <line>15</line>
-          <properties documentPath="W:\Programming\Unity\Unity-Games\RPG Gameboard Party Game\Assets\Scripts\States\GameStateMachine.cs" initialLine="15" containingFunctionPresentation="method 'Enter'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/UIManager.cs</url>
+          <line>59</line>
+          <properties documentPath="W:\Programming\Unity\Unity-Games\RPG Gameboard Party Game\Assets\Scripts\UI\UIManager.cs" initialLine="58" containingFunctionPresentation="method 'UpdateMoney'">
             <startOffsets>
-              <option value="315" />
+              <option value="1522" />
             </startOffsets>
             <endOffsets>
-              <option value="316" />
+              <option value="1537" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/States/GameBoard/GameStates.cs</url>
-          <line>11</line>
-          <properties documentPath="W:\Programming\Unity\Unity-Games\RPG Gameboard Party Game\Assets\Scripts\States\GameStateMachine.cs" initialLine="11" containingFunctionPresentation="constructor 'GameStateMachine'">
-            <startOffsets>
-              <option value="232" />
-            </startOffsets>
-            <endOffsets>
-              <option value="252" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/States/Player/PlayerMove.cs</url>
-          <line>28</line>
-          <properties documentPath="W:\Programming\Unity\Unity-Games\RPG Gameboard Party Game\Assets\Scripts\States\Player\PlayerMove.cs" initialLine="29" containingFunctionPresentation="method 'Init'">
-            <startOffsets>
-              <option value="664" />
-            </startOffsets>
-            <endOffsets>
-              <option value="665" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="60" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/States/Player/PlayerMove.cs</url>
-          <line>19</line>
-          <properties documentPath="W:\Programming\Unity\Unity-Games\RPG Gameboard Party Game\Assets\Scripts\States\Player\PlayerMove.cs" initialLine="19" containingFunctionPresentation="method 'Enter'">
-            <startOffsets>
-              <option value="467" />
-            </startOffsets>
-            <endOffsets>
-              <option value="468" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="61" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/States/Player/PlayerMove.cs</url>
-          <line>23</line>
-          <properties documentPath="W:\Programming\Unity\Unity-Games\RPG Gameboard Party Game\Assets\Scripts\States\Player\PlayerMove.cs" initialLine="24" containingFunctionPresentation="method 'Enter'">
-            <startOffsets>
-              <option value="551" />
-            </startOffsets>
-            <endOffsets>
-              <option value="585" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="67" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Camera/CameraManager.cs</url>
-          <line>31</line>
-          <properties documentPath="W:\Programming\Unity\Unity-Games\RPG Gameboard Party Game\Assets\Scripts\Camera\CameraManager.cs" initialLine="35" containingFunctionPresentation="method 'EnableGameBoardCamera'">
-            <startOffsets>
-              <option value="900" />
-            </startOffsets>
-            <endOffsets>
-              <option value="901" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="68" />
+          <option name="timeStamp" value="81" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Type#States.Player.PlayerData" memberName="Inventory" />
+      </pinned-members>
+    </pin-to-top-manager>
     <watches-manager>
       <configuration name="UNITY_DEBUG_RUN_CONFIGURATION">
         <watch expression="gameSystem.turnManager.CurrentPlayer()" />

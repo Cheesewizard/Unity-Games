@@ -2,6 +2,7 @@
 using Camera;
 using GameBoard.Dice;
 using States.Player;
+using UI;
 using UnityEngine;
 
 namespace States.GameBoard
@@ -36,6 +37,7 @@ namespace States.GameBoard
 
         private void Awake()
         {
+            UIManager.Instance.SetupPlayerCoinsUI(players.Length);
             diceNumbers = new int[dice.Length];
             turnManager = new TurnManager(true, players.Length, 10);
             playerManager = new PlayerManager(players);

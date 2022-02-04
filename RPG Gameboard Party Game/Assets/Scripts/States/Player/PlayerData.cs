@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using States.Player.Inventory;
+using UnityEngine;
 
 namespace States.Player
 {

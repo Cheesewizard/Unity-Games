@@ -1,7 +1,9 @@
-public interface IInventory
+namespace States.Player.Inventory
 {
-    int Coins { get; set; }
-
-    void AddCoins(int money);
-    void RemoveCoins(int money);
+    public interface IInventory
+    {
+        int Coins { get; set; }
+        void AddCoins(int coins);
+        void RemoveCoins(int coins);
+    }
 }

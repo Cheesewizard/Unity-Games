@@ -1,9 +1,15 @@
+using States.Player;
 using UnityEngine;
 
-public class RemoveMoney : MonoBehaviour, ITile
+namespace GameBoard.Tiles
 {
-    public void ActivateTile()
+    public class RemoveMoney : MonoBehaviour, ITile
     {
-        Debug.Log("Remove 3 coins");
+        public PlayerData ActivateTile(PlayerData playerData)
+        {
+            Debug.Log("Remove 3 coins");
+            playerData.Inventory.RemoveCoins(3);
+            return playerData;
+        }
     }
 }

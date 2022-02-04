@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using States.Player;
+using States.Player.Inventory;
+using UI;
 using UnityEngine;
 
 public class PlayerManager
@@ -40,11 +42,13 @@ public class PlayerManager
             PlayerId = playerId,
             Player = player,
             PositionIndex = 0,
-            Inventory = new Inventory()
+            Inventory = new Inventory(playerId)
         };
-
+        
         PlayerDataDict.Add(playerId, data);
     }
+    
+    
 
     public void RemovePlayer(int playerId)
     {
@@ -67,19 +71,6 @@ public class PlayerManager
         return !PlayerDataDict.ContainsKey(playerId) ? new PlayerData() : PlayerDataDict[playerId];
     }
 
-    public int GetPlayerIdFromPlayerIndex(int currentPlayerIndex)
-    {
-        for (var i = 0; i < _players.Length; i++)
-        {
-            if (i == currentPlayerIndex)
-            {                
-               return _players[i].GetComponent<PlayerId>().Id;
-            }
-        }
-
-        return -1;
-    }
-    
     public PlayerData GetPlayerDataFromPlayerIndex(int index)
     {
         for (var i = 0; i < _players.Length; i++)

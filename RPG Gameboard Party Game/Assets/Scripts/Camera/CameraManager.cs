@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Camera
 {
@@ -16,10 +17,19 @@ namespace Camera
             _cameras = cameras;
         }
 
-        public void MoveCameraToPlayer(CameraEnum camera, Transform target)
+        public void MoveCameraToPlayerInstant(CameraEnum camera, Transform target)
         {
             var followPlayer = _cameras[(int) camera].gameObject.GetComponent<FollowPlayer>();
             followPlayer.target = target;
+        } 
+        
+        [Obsolete]
+        public void MoveCameraToPlayerSmooth(CameraEnum camera, Transform target)
+        { 
+            var followPlayer = _cameras[(int) camera].gameObject.GetComponent<FollowPlayer>();
+            
+            followPlayer.target.position = Vector3.Lerp(followPlayer.transform.position,
+                target.position, _zoomSpeed * Time.deltaTime);
         }
 
         public void EnablePlayerCamera()
@@ -39,9 +49,6 @@ namespace Camera
             var followPlayer = _cameras?[(int) CameraEnum.PlayerCamera].gameObject.GetComponent<FollowPlayer>();
             if (followPlayer != null)
             {
-                // followPlayer.offset = new Vector3(followPlayer.offset.x,
-                //     Mathf.Lerp(_zoomIn, _zoomOut, _zoomSpeed * Time.deltaTime), followPlayer.offset.z);
-
                 followPlayer.offset = Vector3.Lerp(followPlayer.offset,
                     new Vector3(followPlayer.offset.x, _zoomOut, followPlayer.offset.z), _zoomSpeed * Time.deltaTime);
             }

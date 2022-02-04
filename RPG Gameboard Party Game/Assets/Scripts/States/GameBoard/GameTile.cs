@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using States;
-using States.GameBoard;
-using States.Player;
+using GameBoard.Tiles;
 using UnityEngine;
 
 namespace States.GameBoard
@@ -19,9 +17,10 @@ namespace States.GameBoard
             if (tileEffect != null)
             {
                 Debug.Log("Tile Activated");
-                tileEffect.ActivateTile();
+                gameSystem.playerManager.UpdatePlayerData(gameSystem.playerData.PlayerId,
+                    tileEffect.ActivateTile(gameSystem.playerData));
             }
-            
+
             gameSystem.StartCoroutine(gameSystem.TransitionToState(1, new EndTurn(gameSystem)));
             yield return null;
         }

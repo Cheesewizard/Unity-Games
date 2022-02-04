@@ -14,7 +14,7 @@ namespace States.GameBoard
         public override IEnumerator Enter()
         {
             Debug.Log("Entered looking At GameBoard");
-            gameSystem.cameraManager.MoveCameraToPlayer(CameraEnum.PlayerCamera, gameSystem.playerData.Player.transform);
+            gameSystem.cameraManager.MoveCameraToPlayerInstant(CameraEnum.PlayerCamera, gameSystem.playerData.Player.transform);
             gameSystem.cameraManager.EnableGameBoardCamera();
             gameSystem.cameras[(int) CameraEnum.GameBoardCamera].gameObject.GetComponent<MoveTransform>().isEnabled = true;
             

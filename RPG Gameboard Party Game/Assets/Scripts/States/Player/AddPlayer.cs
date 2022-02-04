@@ -1,4 +1,5 @@
 using System;
+using UI;
 using UnityEngine;
 
 
@@ -20,13 +21,13 @@ namespace States.Player
 
         private void OnEnable()
         {
-            PlayerMoving += GameManager.Instance.StartDice;
+            //PlayerMoving += GameManager.Instance.StartDice;
             PlayerSteps += UIManager.Instance.UpdateMovement;
         }
 
         private void OnDisable()
         {
-            PlayerMoving -= GameManager.Instance.StartDice;
+            //PlayerMoving -= GameManager.Instance.StartDice;
             PlayerSteps -= UIManager.Instance.UpdateMovement;
         }
     }

@@ -1,4 +1,9 @@
-public interface ITile
+using States.Player;
+
+namespace GameBoard.Tiles
 {
-    void ActivateTile();
+    public interface ITile
+    {
+        PlayerData ActivateTile(PlayerData playerData);
+    }
 }

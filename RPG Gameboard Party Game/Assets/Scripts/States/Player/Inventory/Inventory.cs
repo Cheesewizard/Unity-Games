@@ -1,16 +1,37 @@
-using UnityEngine;
+using System;
+using UI;
 
-public class Inventory : IInventory
+namespace States.Player.Inventory
 {
-    public int Coins { get; set ; }
+    public class Inventory : IInventory
+    { 
+        Action<int, int> onUpdateCoins;
 
-    public void AddCoins(int money)
-    {
-        this.Coins += money;
-    }
+        private int _playerId;
+        public Inventory(int playerId)
+        {
+            _playerId = playerId;
+            onUpdateCoins += UIManager.Instance.UpdateMoney;
+        }
+        
+        private int _coins;
+        public int Coins
+        {
+            get { return _coins; }
+            set
+            {
+                _coins = value;
+                onUpdateCoins?.Invoke(_playerId, Coins);
+            }
+        }
 
-    public void RemoveCoins(int money)
-    {
-        this.Coins -= money;
+        public void AddCoins(int coins)
+        {
+            Coins += coins;
+        }
+        public void RemoveCoins(int coins)
+        {
+            Coins -= coins;
+        }
     }
 }

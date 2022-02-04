@@ -17,7 +17,7 @@ namespace States.GameBoard
             // 1st ever call is redundant since this is called in the gameboardsystem. Its needed though to setup camera for 1st time
             gameSystem.playerData = gameSystem.playerManager.GetPlayerData(gameSystem.turnManager.CurrentPlayer());
 
-            gameSystem.cameraManager.MoveCameraToPlayer(CameraEnum.PlayerCamera, gameSystem.playerData.Player.transform);
+            gameSystem.cameraManager.MoveCameraToPlayerInstant(CameraEnum.PlayerCamera, gameSystem.playerData.Player.transform);
             gameSystem.cameraManager.EnablePlayerCamera();
             yield return null;
         }
