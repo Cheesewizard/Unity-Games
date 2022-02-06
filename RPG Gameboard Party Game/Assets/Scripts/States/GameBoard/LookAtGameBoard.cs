@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using Helpers;
-using States.GameBoard;
+using Manager.Camera;
+using Mirror;
+using States.GameBoard.StateSystem;
 using UnityEngine;
 
 namespace States.GameBoard
 {
-    public class LookAtGameBoard: GameStates
+    public class LookAtGameBoard : GameStates
     {
         public LookAtGameBoard(GameBoardSystem gameSystem) : base(gameSystem)
         {
@@ -14,27 +16,50 @@ namespace States.GameBoard
         public override IEnumerator Enter()
         {
             Debug.Log("Entered looking At GameBoard");
-            gameSystem.cameraManager.MoveCameraToPlayerInstant(CameraEnum.PlayerCamera, gameSystem.playerData.Player.transform);
-            gameSystem.cameraManager.EnableGameBoardCamera();
-            gameSystem.cameras[(int) CameraEnum.GameBoardCamera].gameObject.GetComponent<MoveTransform>().isEnabled = true;
-            
+
+            CameraManager.Instance.camerasInScene[(int) CameraEnum.GameBoardCamera].gameObject
+                    .GetComponent<MoveTransform>().isEnabled =
+                true;
+
+            CameraManager.Instance.RpcMoveCameraPositionTo(CameraEnum.GameBoardCamera,
+                gameSystem.playerDataManager.CmdGetPlayerDataFromIndex(gameSystem.turnManager.GetCurrentPlayerIndex())
+                    .Player
+                    .gameObject.transform);
+
+            CameraManager.Instance.RpcEnableGameBoardCamera();
             yield return null;
         }
 
         public override IEnumerator Exit()
         {
-            gameSystem.cameras[(int) CameraEnum.GameBoardCamera].gameObject.GetComponent<MoveTransform>().isEnabled = false;
+            CameraManager.Instance.camerasInScene[(int) CameraEnum.GameBoardCamera].gameObject
+                    .GetComponent<MoveTransform>().isEnabled =
+                false;
             yield return null;
         }
 
         public override void Tick()
         {
+            if (gameSystem.CheckIfHasAuthority())
+            {
+                CheckInput();
+            }
+        }
+
+        private void CheckInput()
+        {
+            CmdExitCameraButton();
+        }
+
+        [Command]
+        private void CmdExitCameraButton()
+        {
             // Press T to continue
             if (Input.GetKeyDown(KeyCode.T))
             {
-                gameSystem.cameraManager.EnablePlayerCamera();
+                CameraManager.Instance.RpcEnablePlayerCamera();
                 gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new Player.Player(gameSystem)));
-            } 
+            }
         }
     }
 }

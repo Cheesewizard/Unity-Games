@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Linq;
+using Manager.Camera;
 using States.GameBoard;
+using States.GameBoard.StateSystem;
 using UnityEngine;
 
 namespace States.Player
@@ -8,7 +10,6 @@ namespace States.Player
     public class PlayerMove : GameStates
     {
         private int _steps;
-        private bool _isMoving = false;
         private int _routePosition;
         private MovePlayerToTile _movePlayerPosition;
 
@@ -21,8 +22,16 @@ namespace States.Player
             Debug.Log("Entered Move Character");
             Init();
 
-            gameSystem.StartCoroutine(Move());
-            yield return null;
+            yield return gameSystem.StartCoroutine(Move());
+
+            // This code seems like a clunky way to manage the first turn for game start
+            GameStates nextState = new GameTile(gameSystem);
+            if (gameSystem.playerData.IsPlayerTurnStarted)
+            {
+                nextState = new StartTurn(gameSystem);
+            }
+
+            yield return gameSystem.StartCoroutine(gameSystem.TransitionToState(1, nextState));
         }
 
         private void Init()
@@ -36,58 +45,62 @@ namespace States.Player
 
         public override IEnumerator Exit()
         {
+            // Set first turn to false.
+            if (gameSystem.playerData.IsPlayerTurnStarted)
+            {
+                Debug.Log("Setting First Turn to False");
+                gameSystem.playerData.IsPlayerTurnStarted = false;
+                gameSystem.playerDataManager.CmdUpdatePlayerData(gameSystem.playerData.NetworkIdentity.netId, gameSystem.playerData);
+            }
+
+            // Reset the dice numbers for the next player
+            gameSystem.diceNumbers.Clear();
+
             // Move player smaller and move into the corner? 
             yield return null;
         }
 
         public override void Tick()
         {
-            gameSystem.cameraManager.ZoomOut(); 
+            if (gameSystem.playerData.IsPlayerTurnStarted)
+            {
+                return;
+            }
+
+            CameraManager.Instance.RpcZoomOut();
         }
 
         private IEnumerator Move()
         {
-            if (_isMoving)
-            {
-                yield break;
-            }
-
-            _isMoving = true;
             //PlayerMoving?.Invoke(true);
 
             while (_steps > 0)
             {
                 //PlayerSteps?.Invoke(steps);
-
-                _routePosition++;
                 _routePosition %= gameSystem.currentRoute.childNodesList.Count;
 
                 gameSystem.currentTile = gameSystem.currentRoute.childNodesList[_routePosition].gameObject;
                 var nextPos = gameSystem.currentRoute.childNodesList[_routePosition].position;
-                while (_movePlayerPosition.MoveToNextNode(nextPos, gameSystem.playerSpeed))
+                while (_movePlayerPosition.MoveToNextNode(nextPos, gameSystem.playerData.PlayerSpeed))
                 {
                     yield return null;
                 }
 
                 yield return new WaitForSeconds(0.1f);
+                _routePosition++;
                 _steps--;
             }
 
-            _isMoving = false;
-            UpdatePlayerPosition(gameSystem.playerData.PlayerId, _routePosition);
-
+            UpdatePlayerPosition(gameSystem.playerData.NetworkIdentity.netId, _routePosition);
 
             //PlayerSteps?.Invoke(steps);
             //PlayerMoving?.Invoke(false);
-            gameSystem.StartCoroutine(gameSystem.TransitionToState(1, new GameTile(gameSystem)));
         }
 
-        private void UpdatePlayerPosition(int playerId, int routePosition)
+        private void UpdatePlayerPosition(uint playerId, int routePosition)
         {
             gameSystem.playerData.PositionIndex = routePosition;
-            gameSystem.playerManager.UpdatePlayerData(playerId, gameSystem.playerData);
+            gameSystem.playerDataManager.CmdUpdatePlayerData(playerId, gameSystem.playerData);
         }
-
-
     }
 }

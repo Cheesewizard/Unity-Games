@@ -1,6 +1,5 @@
 ﻿public enum CameraEnum
 {
-    MainCamera = 0,
-    PlayerCamera = 1,
-    GameBoardCamera = 2
+    PlayerCamera = 0,
+    GameBoardCamera = 1
 }

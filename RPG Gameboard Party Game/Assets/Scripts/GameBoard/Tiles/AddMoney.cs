@@ -1,3 +1,4 @@
+using Player;
 using States.Player;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace GameBoard.Tiles
         {
             // Add money
             Debug.Log("Add 3 coins");
-            playerData.Inventory.AddCoins(3);
+            StartCoroutine(playerData.Inventory.AddCoins(3));
             return playerData;
         }
     }

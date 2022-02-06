@@ -2,6 +2,6 @@ namespace States.Player
 {
     public interface IPlayer
     {
-        int Id { get; set; }
+        uint PlayerId { get; set; }
     }
 }

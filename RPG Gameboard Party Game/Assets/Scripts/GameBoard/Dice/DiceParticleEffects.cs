@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Mirror;
+using UnityEngine;
 
-public class DiceParticleEffects : MonoBehaviour
+public class DiceParticleEffects : NetworkBehaviour
 {
     [Header("Particle Effects")] 
     [SerializeField]
@@ -8,7 +9,7 @@ public class DiceParticleEffects : MonoBehaviour
 
     [SerializeField] 
     private ParticleSystem _diceIdleEffect;
-
+    
     public void Start()
     {
         //diceRotate.rotate = true;
@@ -17,7 +18,7 @@ public class DiceParticleEffects : MonoBehaviour
         //DiceIsPlaying?.Invoke(true);k
         //DiceIsPlaying?.Invoke(true);k
     }
-
+    
     public void PlayDiceHitEffect()
     {
         //diceRotate.rotate = false;

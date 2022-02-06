@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using Mirror;
+using States.GameBoard.StateSystem;
 using UnityEngine;
 
 namespace States.GameBoard
@@ -13,12 +15,6 @@ namespace States.GameBoard
         {
             Debug.Log("Entered Start Turn");
             Debug.Log("Press Space To Continue");
-            
-            // 1st ever call is redundant since this is called in the gameboardsystem. Its needed though to setup camera for 1st time
-            gameSystem.playerData = gameSystem.playerManager.GetPlayerData(gameSystem.turnManager.CurrentPlayer());
-
-            gameSystem.cameraManager.MoveCameraToPlayerInstant(CameraEnum.PlayerCamera, gameSystem.playerData.Player.transform);
-            gameSystem.cameraManager.EnablePlayerCamera();
             yield return null;
         }
 
@@ -29,11 +25,25 @@ namespace States.GameBoard
 
         public override void Tick()
         {
+            if (gameSystem.CheckIfHasAuthority())
+            {
+                CheckInput();
+            }
+        }
+
+        private void CheckInput()
+        {
+            CmdStartTurnButton();
+        }
+
+        [Command]
+        private void CmdStartTurnButton()
+        {
             // Press space to continue
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 gameSystem.StartCoroutine(gameSystem.TransitionToState(0.5f, new Player.Player(gameSystem)));
-            } 
+            }
         }
     }
 }

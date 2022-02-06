@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using GameBoard.Tiles;
+using Manager.Camera;
+using States.GameBoard.StateSystem;
 using UnityEngine;
 
 namespace States.GameBoard
@@ -17,7 +19,7 @@ namespace States.GameBoard
             if (tileEffect != null)
             {
                 Debug.Log("Tile Activated");
-                gameSystem.playerManager.UpdatePlayerData(gameSystem.playerData.PlayerId,
+                gameSystem.playerDataManager.CmdUpdatePlayerData(gameSystem.playerData.NetworkIdentity.netId,
                     tileEffect.ActivateTile(gameSystem.playerData));
             }
 
@@ -32,7 +34,7 @@ namespace States.GameBoard
 
         public override void Tick()
         {
-            gameSystem.cameraManager.ZoomIn();
+            CameraManager.Instance.RpcZoomIn();
         }
     }
 }

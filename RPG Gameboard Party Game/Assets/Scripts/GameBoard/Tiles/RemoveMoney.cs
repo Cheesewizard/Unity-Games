@@ -1,3 +1,4 @@
+using Player;
 using States.Player;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace GameBoard.Tiles
         public PlayerData ActivateTile(PlayerData playerData)
         {
             Debug.Log("Remove 3 coins");
-            playerData.Inventory.RemoveCoins(3);
+            StartCoroutine(playerData.Inventory.RemoveCoins(3));
             return playerData;
         }
     }
