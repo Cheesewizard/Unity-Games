@@ -1,13 +1,17 @@
 ﻿using System.Collections;
+using Helpers;
+using Manager.Dice;
+using Manager.Turns;
 using Mirror;
+using Player;
 using States.GameBoard.StateSystem;
 using UnityEngine;
 
 namespace States.GameBoard
 {
-    public class StartTurn : GameStates
+    public class StartTurnState : GameStates
     {
-        public StartTurn(GameBoardSystem gameSystem) : base(gameSystem)
+        public StartTurnState(GameBoardSystem gameSystem) : base(gameSystem)
         {
         }
 
@@ -25,7 +29,7 @@ namespace States.GameBoard
 
         public override void Tick()
         {
-            if (gameSystem.CheckIfHasAuthority())
+            if (gameSystem.IsPlayerTurn())
             {
                 CheckInput();
             }
@@ -42,7 +46,7 @@ namespace States.GameBoard
             // Press space to continue
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                gameSystem.StartCoroutine(gameSystem.TransitionToState(0.5f, new Player.Player(gameSystem)));
+                gameSystem.StartCoroutine(gameSystem.TransitionToState(0.5f, new Player.PlayerState(gameSystem)));
             }
         }
     }

@@ -10,13 +10,13 @@ using UnityEngine;
 
 namespace States.Dice
 {
-    public class Dice : GameStates
+    public class DiceState : GameStates
     {
         // Events
         public Action<bool> DiceIsPlaying;
         public Action DiceIsHit;
 
-        public Dice(GameBoardSystem gameSystem) : base(gameSystem)
+        public DiceState(GameBoardSystem gameSystem) : base(gameSystem)
         {
         }
 
@@ -35,32 +35,37 @@ namespace States.Dice
 
         public override IEnumerator Enter()
         {
-            DiceManager.Instance.MoveDiceToTarget(gameSystem.playerData.Player.transform);
-            NetworkHelpers.RpcToggleObjectVisibility(DiceManager.Instance.dicePosition.gameObject,true);
+            DiceSetup(true);
+            yield return null;
+        }
 
-            foreach (var die in DiceManager.Instance.diceInScene)
+        private void DiceSetup(bool setup)
+        {
+            if (!gameSystem.IsPlayerTurn())
             {
-                die.GetComponent<AnimateDice>().rotate = true;
+                return;
             }
 
-            yield return null;
+            DiceManager.Instance.CmdSpawnDice(2);
+            NetworkHelpers.RpcToggleObjectVisibility(DiceManager.Instance.dicePosition.gameObject, setup);
         }
 
         public override IEnumerator Exit()
         {
-            NetworkHelpers.RpcToggleObjectVisibility(DiceManager.Instance.dicePosition.gameObject,false);
+            DiceManager.Instance.RemoveDiceFromScene();
             yield return null;
         }
 
 
         public override void Tick()
         {
-            if (gameSystem.CheckIfHasAuthority())
+            if (gameSystem.IsPlayerTurn())
             {
                 CheckInput();
             }
         }
-        
+
+        [Client]
         private void CheckInput()
         {
             CmdExitDiceButton();
@@ -73,7 +78,7 @@ namespace States.Dice
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("Exit Dice Option");
-                gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new Player.Player(gameSystem)));
+                gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new Player.PlayerState(gameSystem)));
                 return;
             }
         }
@@ -85,25 +90,25 @@ namespace States.Dice
             {
                 Debug.Log("Hello from the dice hit");
                 RpcPlayParticleEffect();
-                SetDiceNumber();
+                RpcSetDiceNumber();
                 gameSystem.StartCoroutine(gameSystem.TransitionToState(1f, new PlayerMove(gameSystem)));
             }
         }
 
 
-        [Client]
-        private void SetDiceNumber()
+        [ClientRpc]
+        private void RpcSetDiceNumber()
         {
             for (var i = 0; i < DiceManager.Instance.diceInScene.Count; i++)
             {
-                gameSystem.diceNumbers.Add(GetDiceNumber());
+                gameSystem.diceNumbers.Add(RpcGetDiceNumber());
                 var animateDice = DiceManager.Instance.diceInScene[i].GetComponentInChildren<AnimateDice>();
                 animateDice.SetDiceToNumber(gameSystem.diceNumbers[i]);
             }
         }
 
         [Server]
-        private int GetDiceNumber()
+        private int RpcGetDiceNumber()
         {
             var die = UnityEngine.Random.Range(1, 7);
             Debug.Log("Dice = " + die);

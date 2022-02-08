@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using Helpers;
+using Manager.Dice;
 using Mirror;
 using States.GameBoard;
 using States.GameBoard.StateSystem;
@@ -6,9 +8,9 @@ using UnityEngine;
 
 namespace States.Player
 {
-    public class Player : GameStates
+    public class PlayerState : GameStates
     {
-        public Player(GameBoardSystem gameSystem) : base(gameSystem)
+        public PlayerState(GameBoardSystem gameSystem) : base(gameSystem)
         {
         }
 
@@ -25,13 +27,13 @@ namespace States.Player
 
         public override void Tick()
         {
-            if (gameSystem.CheckIfHasAuthority())
+            if (gameSystem.IsPlayerTurn())
             {
                 CheckInput();
             }
         }
 
-        
+        [Client]
         private void CheckInput()
         {
             CmdDiceButton();
@@ -46,8 +48,7 @@ namespace States.Player
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("Press Button For Dice");
-                gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new Dice.Dice(gameSystem)));
-                return;
+                GoToDiceState();
             }
         }
 
@@ -57,7 +58,7 @@ namespace States.Player
             if (Input.GetKeyDown(KeyCode.R))
             {
                 Debug.Log("Press Button For Items");
-                //gameSystem.SetState(new Dice(gameSystem));
+                GoToInventoryState();
             }
         }
 
@@ -67,8 +68,25 @@ namespace States.Player
             if (Input.GetKeyDown(KeyCode.T))
             {
                 Debug.Log("Press Button For Look At Game Board Camera");
-                gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new LookAtGameBoard(gameSystem)));
+                GoToGameBoardCameraState();
             }
+        }
+
+        [ClientRpc]
+        private void GoToDiceState()
+        {
+            gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new Dice.DiceState(gameSystem)));
+        }
+
+        [ClientRpc]
+        private void GoToGameBoardCameraState()
+        {
+            gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new GameBoardCameraState(gameSystem)));
+        }
+
+        [ClientRpc]
+        private void GoToInventoryState()
+        {
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace States.Player
+namespace Helpers
 {
-    public class MovePlayerToTile : MonoBehaviour
+    public class MoveToTarget : MonoBehaviour
     {
         public bool MoveToNextNode(Vector3 target, int speed)
         {

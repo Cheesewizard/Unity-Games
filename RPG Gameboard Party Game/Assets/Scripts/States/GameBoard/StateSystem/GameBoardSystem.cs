@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Camera;
+using Helpers;
 using Manager.Camera;
 using Manager.Dice;
 using Manager.Player;
 using Manager.Turns;
-using Manager.UI;
 using Mirror;
-using ParrelSync;
 using Player;
 using States.Menus;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace States.GameBoard.StateSystem
 {
@@ -37,41 +38,17 @@ namespace States.GameBoard.StateSystem
         [HideInInspector] public GameObject currentTile;
 
         // Dice
-        [HideInInspector] public SyncList<int> diceNumbers = new SyncList<int>();
-
-        // Turn Order
-        public TurnManager turnManager;
+        [HideInInspector] public List<int> diceNumbers = new List<int>();
 
         // Data
-        public PlayerDataManager playerDataManager;
         [SyncVar] [HideInInspector] public PlayerData playerData;
-        [HideInInspector] public NetworkIdentity currentAuthority;
+        [SyncVar] public bool startGame = false;
 
         public void Start()
         {
-            //DebugQuickConnect();
-            playerDataManager = new PlayerDataManager();
-
             // Start the game flow
-            currentState = new CharacterAddScreen(this);
+            currentState = new CharacterSetupState(this);
             SetState(currentState);
-        }
-
-
-        private void DebugQuickConnect()
-        {
-            var manager = FindObjectOfType<NetworkManager>();
-            // Debug only
-            if (ClonesManager.IsClone())
-            {
-                // Automatically connect to local host if this is the clone editor
-                manager.StartClient();
-            }
-            else
-            {
-                // Automatically start server if this is the original editor
-                manager.StartHost();
-            }
         }
 
         void Update()
@@ -85,23 +62,25 @@ namespace States.GameBoard.StateSystem
             SetState(state);
         }
 
-        [Server]
-        public void ConfirmSetup() // config gamesettings
+        public void SetStartingValues() // config gamesettings
         {
-            UIManager.Instance.SetupPlayerCoinsUI(playerDataManager.CmdGetAllPlayerData());
-            turnManager = new TurnManager(playerDataManager.CmdGetTotalPlayers(), 10);
-            playerData = playerDataManager.CmdGetPlayerDataFromIndex(turnManager.GetCurrentPlayerIndex());
-            currentAuthority = playerData.NetworkIdentity;
-
-            // Set camera to player 1 on start
-            CameraManager.Instance.RpcSpawnCamerasIntoScene();
-            CameraManager.Instance.RpcChangeCameraTargetPlayer(CameraEnum.PlayerCamera, playerData.Player.transform);
-            DiceManager.Instance.RpcSpawnDice(2);
+            playerData = PlayerDataManager.Instance.CmdGetPlayerDataFromIndex((int) PlayerEnum.Player1);
+            StartGame();
         }
 
-        public bool CheckIfHasAuthority()
+        [ClientRpc]
+        private void StartGame()
         {
-            return currentAuthority == playerData.NetworkIdentity;
+            //UIManager.Instance.SetupPlayerCoinsUI(PlayerDataManager.Instance.CmdGetAllPlayerData());
+            TurnManager.Instance.SetTotalPlayers(PlayerDataManager.Instance.CmdGetTotalPlayers());
+            TurnManager.Instance.SetTotalTurns(10);
+            startGame = true;
+        }
+
+
+        public bool IsPlayerTurn()
+        {
+            return NetworkHelpers.PlayerHasAuthority(TurnManager.Instance.CmdGetCurrentPlayer());
         }
     }
 }

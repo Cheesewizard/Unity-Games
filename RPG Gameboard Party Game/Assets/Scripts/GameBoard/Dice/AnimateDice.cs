@@ -5,11 +5,16 @@ namespace GameBoard.Dice
 {
     public class AnimateDice : NetworkBehaviour
     {
-        [SerializeField] private float spinSpeed = 1f;
+        private const float SpinSpeed = 500f;
         [SerializeField] private Vector3 axis;
-        
-        [SyncVar]
-        public bool rotate;
+        private const int LowAxisRange = 1;
+        private const int HighAxisRange = 361;
+
+        private void Start()
+        {
+            axis = new Vector3(Random.Range(LowAxisRange, HighAxisRange), Random.Range(LowAxisRange, HighAxisRange),
+                Random.Range(LowAxisRange, HighAxisRange));
+        }
         
         [Client]
         void Update()
@@ -17,20 +22,15 @@ namespace GameBoard.Dice
             Rotate();
         }
         
-    
         [Client]
         private void Rotate()
         {
-            if (rotate)
-            {
-                transform.Rotate(axis * spinSpeed * Time.deltaTime, Space.Self);
-            }
+            transform.Rotate(axis, SpinSpeed * Time.deltaTime, Space.Self);
         }
-        
-        [Server]
+
+        [ClientRpc]
         public void SetDiceToNumber(int diceNumber)
         {
-            rotate = false;
             switch (diceNumber)
             {
                 case 1:

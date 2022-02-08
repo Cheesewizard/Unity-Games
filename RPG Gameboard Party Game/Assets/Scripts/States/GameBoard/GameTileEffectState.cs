@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using GameBoard.Tiles;
 using Manager.Camera;
+using Manager.Player;
 using States.GameBoard.StateSystem;
 using UnityEngine;
 
 namespace States.GameBoard
 {
-    public class GameTile : GameStates
+    public class GameTileEffectState : GameStates
     {
-        public GameTile(GameBoardSystem system) : base(system)
+        public GameTileEffectState(GameBoardSystem system) : base(system)
         {
         }
 
@@ -19,11 +20,11 @@ namespace States.GameBoard
             if (tileEffect != null)
             {
                 Debug.Log("Tile Activated");
-                gameSystem.playerDataManager.CmdUpdatePlayerData(gameSystem.playerData.NetworkIdentity.netId,
+                PlayerDataManager.Instance.CmdUpdatePlayerData(gameSystem.playerData.NetworkIdentity.netId,
                     tileEffect.ActivateTile(gameSystem.playerData));
             }
 
-            gameSystem.StartCoroutine(gameSystem.TransitionToState(1, new EndTurn(gameSystem)));
+            gameSystem.StartCoroutine(gameSystem.TransitionToState(1, new EndTurnState(gameSystem)));
             yield return null;
         }
 

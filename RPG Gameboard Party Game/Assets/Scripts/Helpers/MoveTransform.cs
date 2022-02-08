@@ -1,24 +1,44 @@
-﻿using UnityEngine;
+﻿using System;
+using Mirror;
+using States.GameBoard.StateSystem;
+using UnityEngine;
 
 namespace Helpers
 {
-    public class MoveTransform : MonoBehaviour
+    public class MoveTransform : NetworkBehaviour
     {
-        public float offset = 2f; 
         public float speed = 2f;
         public bool isEnabled = false;
 
-        void LateUpdate()
+   
+        private Vector3 _lastMovement;
+
+        void Update()
         {
-            if (isEnabled)
+            if (isEnabled && GameBoardSystem.Instance.IsPlayerTurn())
             {
-                Move();
+                GetMovement();
             }
         }
 
-        private void Move()
+        [Command]
+        private void GetMovement()
         {
-            var movement = new Vector3 (Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            var movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            
+            // Only update the server when we have actually made a change
+            if (movement == _lastMovement)
+            {
+                return;
+            }
+
+            _lastMovement = movement;
+            MoveCamera(movement);
+        }
+
+        [ClientRpc]
+        private void MoveCamera(Vector3 movement)
+        {
             transform.position += movement * speed * Time.deltaTime;
         }
     }

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Linq;
+using Helpers;
 using Manager.Camera;
+using Manager.Player;
 using States.GameBoard;
 using States.GameBoard.StateSystem;
 using UnityEngine;
@@ -11,7 +13,7 @@ namespace States.Player
     {
         private int _steps;
         private int _routePosition;
-        private MovePlayerToTile _movePlayerPosition;
+        private MoveToTarget _movePosition;
 
         public PlayerMove(GameBoardSystem gameSystem) : base(gameSystem)
         {
@@ -25,10 +27,10 @@ namespace States.Player
             yield return gameSystem.StartCoroutine(Move());
 
             // This code seems like a clunky way to manage the first turn for game start
-            GameStates nextState = new GameTile(gameSystem);
+            GameStates nextState = new GameTileEffectState(gameSystem);
             if (gameSystem.playerData.IsPlayerTurnStarted)
             {
-                nextState = new StartTurn(gameSystem);
+                nextState = new StartTurnState(gameSystem);
             }
 
             yield return gameSystem.StartCoroutine(gameSystem.TransitionToState(1, nextState));
@@ -36,8 +38,8 @@ namespace States.Player
 
         private void Init()
         {
-            _routePosition = gameSystem.playerData.PositionIndex;
-            _movePlayerPosition = gameSystem.playerData.Player.GetComponent<MovePlayerToTile>();
+            _routePosition = gameSystem.playerData.BoardLocationIndex;
+            _movePosition = gameSystem.playerData.Player.GetComponent<MoveToTarget>();
 
             // Total the value of all the dice and add to amount of steps able to take
             _steps = gameSystem.diceNumbers.Sum();
@@ -50,7 +52,7 @@ namespace States.Player
             {
                 Debug.Log("Setting First Turn to False");
                 gameSystem.playerData.IsPlayerTurnStarted = false;
-                gameSystem.playerDataManager.CmdUpdatePlayerData(gameSystem.playerData.NetworkIdentity.netId, gameSystem.playerData);
+                PlayerDataManager.Instance.CmdUpdatePlayerData(gameSystem.playerData.NetworkIdentity.netId, gameSystem.playerData);
             }
 
             // Reset the dice numbers for the next player
@@ -81,7 +83,7 @@ namespace States.Player
 
                 gameSystem.currentTile = gameSystem.currentRoute.childNodesList[_routePosition].gameObject;
                 var nextPos = gameSystem.currentRoute.childNodesList[_routePosition].position;
-                while (_movePlayerPosition.MoveToNextNode(nextPos, gameSystem.playerData.PlayerSpeed))
+                while (_movePosition.MoveToNextNode(nextPos, gameSystem.playerData.PlayerSpeed))
                 {
                     yield return null;
                 }
@@ -99,8 +101,8 @@ namespace States.Player
 
         private void UpdatePlayerPosition(uint playerId, int routePosition)
         {
-            gameSystem.playerData.PositionIndex = routePosition;
-            gameSystem.playerDataManager.CmdUpdatePlayerData(playerId, gameSystem.playerData);
+            gameSystem.playerData.BoardLocationIndex = routePosition;
+            PlayerDataManager.Instance.CmdUpdatePlayerData(playerId, gameSystem.playerData);
         }
     }
 }

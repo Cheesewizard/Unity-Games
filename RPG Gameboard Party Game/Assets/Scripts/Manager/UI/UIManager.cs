@@ -32,7 +32,7 @@ namespace Manager.UI
         public Dictionary<uint, TextMeshProUGUI> playerCointsDict = new Dictionary<uint, TextMeshProUGUI>();
         private readonly string _moneyHeader = "Coins ";
 
-        [Server]
+        [Command]
         public void SetupPlayerCoinsUI(List<PlayerData> playerDatas)
         {
             // Set player id - Needs changing later

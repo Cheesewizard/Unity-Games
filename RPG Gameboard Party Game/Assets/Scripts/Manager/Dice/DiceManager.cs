@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Helpers;
 using Mirror;
+using States.GameBoard.StateSystem;
 using UnityEngine;
 
 namespace Manager.Dice
@@ -26,33 +29,41 @@ namespace Manager.Dice
 
 
         public GameObject dice;
+
         public Transform dicePosition;
         public readonly List<GameObject> diceInScene = new List<GameObject>();
 
-        [Client]
-        public void MoveDiceToTarget(Transform target)
+        [Command(requiresAuthority = false)]
+        public void CmdSpawnDice(int amount)
         {
-            var position = target.transform.position;
-            dicePosition.transform.position = new Vector3(position.x, position.y + 2, position.z);
+            InstantiateDiceInScene(amount);
+            MoveDiceEqualDistanceApart();
+            NetworkHelpers.RpcToggleObjectVisibility(dicePosition.gameObject, false);
+            OrganiseDiceInScene();
+            SpawnDice();
+            MoveDiceToTarget(GameBoardSystem.Instance.playerData.Player.transform);
         }
 
-
         [ClientRpc]
-        public void RpcSpawnDice(int amount)
+        private void InstantiateDiceInScene(int amount)
         {
             for (var i = 0; i < amount; i++)
             {
                 var die = Instantiate(dice, dicePosition.transform.position, Quaternion.identity);
-                NetworkServer.Spawn(die);
                 diceInScene.Add(die);
             }
-
-            MoveDiceEqualDistanceApart();
-            OrganiseDiceInScene();
-            NetworkHelpers.RpcToggleObjectVisibility(dicePosition.gameObject, false);
         }
 
-        [Client]
+        private void SpawnDice()
+        {
+            // Spawn the dice that have been setup in the client worlds
+            foreach (var die in diceInScene)
+            {
+                NetworkServer.Spawn(die);
+            }
+        }
+
+        [ClientRpc]
         private void MoveDiceEqualDistanceApart()
         {
             const float offset = 3f;
@@ -78,10 +89,12 @@ namespace Manager.Dice
             }
         }
 
-        [Client]
+        [ClientRpc]
         private void OrganiseDiceInScene()
         {
             var totalBounds = diceInScene[0].GetComponentInChildren<MeshRenderer>().bounds;
+
+            // Skip 1 as we dont want to parent object 
             foreach (var die in diceInScene.Skip(1))
             {
                 var r = die.GetComponentInChildren<MeshRenderer>();
@@ -95,6 +108,24 @@ namespace Manager.Dice
             {
                 die.transform.SetParent(dicePosition.transform);
             }
+        }
+
+        [ClientRpc]
+        private void MoveDiceToTarget(Transform target)
+        {
+            var position = target.transform.position;
+            dicePosition.transform.position = new Vector3(position.x, position.y + 2, position.z);
+        }
+
+        [ClientRpc]
+        public void RemoveDiceFromScene()
+        {
+            foreach (var die in diceInScene)
+            {
+                NetworkServer.Destroy(die);
+            }
+
+            diceInScene.Clear();
         }
     }
 }

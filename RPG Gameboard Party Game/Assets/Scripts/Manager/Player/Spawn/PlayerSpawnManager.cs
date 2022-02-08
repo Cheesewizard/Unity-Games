@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Mirror;
 using UnityEngine;
 
 namespace Manager.Player.Spawn
 {
+    [Obsolete]
     public class PlayerSpawnManager : NetworkBehaviour
     {
         public static PlayerSpawnManager Instance { get; private set; }
@@ -32,7 +34,7 @@ namespace Manager.Player.Spawn
         }
 
 
-        [Server]
+        [Command]
         public void SpawnPlayerAt(GameObject player)
         {
             if (_spawns.Count <= 0)
@@ -43,8 +45,7 @@ namespace Manager.Player.Spawn
             var spawn = _spawns.Dequeue();
             SetPlayerSpawn(player, spawn);
         }
-
-        [Server]
+        
         private void QueuePlayerSpawns()
         {
             var spawns = playerSpawnObject.GetComponentsInChildren<Transform>();

@@ -1,28 +1,28 @@
 ﻿using System.Collections;
+using Camera;
 using Helpers;
 using Manager.Camera;
+using Manager.Player;
+using Manager.Turns;
 using Mirror;
 using States.GameBoard.StateSystem;
 using UnityEngine;
 
 namespace States.GameBoard
 {
-    public class LookAtGameBoard : GameStates
+    public class GameBoardCameraState : GameStates
     {
-        public LookAtGameBoard(GameBoardSystem gameSystem) : base(gameSystem)
+        public GameBoardCameraState(GameBoardSystem gameSystem) : base(gameSystem)
         {
         }
 
         public override IEnumerator Enter()
         {
             Debug.Log("Entered looking At GameBoard");
-
-            CameraManager.Instance.camerasInScene[(int) CameraEnum.GameBoardCamera].gameObject
-                    .GetComponent<MoveTransform>().isEnabled =
-                true;
+            EnableMoveCamera(true);
 
             CameraManager.Instance.RpcMoveCameraPositionTo(CameraEnum.GameBoardCamera,
-                gameSystem.playerDataManager.CmdGetPlayerDataFromIndex(gameSystem.turnManager.GetCurrentPlayerIndex())
+                PlayerDataManager.Instance.CmdGetPlayerDataFromIndex((int)TurnManager.Instance.CmdGetCurrentPlayer())
                     .Player
                     .gameObject.transform);
 
@@ -32,20 +32,27 @@ namespace States.GameBoard
 
         public override IEnumerator Exit()
         {
-            CameraManager.Instance.camerasInScene[(int) CameraEnum.GameBoardCamera].gameObject
-                    .GetComponent<MoveTransform>().isEnabled =
-                false;
+            EnableMoveCamera(false);
             yield return null;
         }
 
         public override void Tick()
         {
-            if (gameSystem.CheckIfHasAuthority())
+            if (gameSystem.IsPlayerTurn())
             {
                 CheckInput();
             }
         }
 
+        [ClientRpc]
+        private void EnableMoveCamera(bool isEnable)
+        {
+            CameraManager.Instance.camerasInScene[CameraEnum.GameBoardCamera].gameObject
+                .GetComponent<MoveTransform>().isEnabled = isEnable;
+        }
+
+
+        [Client]
         private void CheckInput()
         {
             CmdExitCameraButton();
@@ -57,9 +64,15 @@ namespace States.GameBoard
             // Press T to continue
             if (Input.GetKeyDown(KeyCode.T))
             {
-                CameraManager.Instance.RpcEnablePlayerCamera();
-                gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new Player.Player(gameSystem)));
+                GoToPlayerState();
             }
+        }
+
+        [ClientRpc]
+        private void GoToPlayerState()
+        {
+            CameraManager.Instance.RpcEnablePlayerCamera();
+            gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new Player.PlayerState(gameSystem)));
         }
     }
 }

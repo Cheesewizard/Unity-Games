@@ -8,9 +8,11 @@ namespace Player
     {
         public NetworkIdentity NetworkIdentity { get; set; }
         public GameObject Player { get; set; }
-        public int PositionIndex { get; set; }
+        public int BoardLocationIndex { get; set; }
         public bool IsPlayerTurnStarted { get; set; }
-        
+
+        public int PlayerTurnId { get; set; }
+
         public int PlayerTurnCounter { get; set; }
         public IInventory Inventory { get; set; }
 

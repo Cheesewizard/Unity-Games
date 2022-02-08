@@ -1,5 +1,8 @@
-﻿public enum CameraEnum
+﻿namespace Camera
 {
-    PlayerCamera = 0,
-    GameBoardCamera = 1
+    public enum CameraEnum
+    {
+        PlayerCamera = 0,
+        GameBoardCamera = 1
+    }
 }

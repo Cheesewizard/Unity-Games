@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Camera;
 using Helpers;
 using Mirror;
+using States.GameBoard.StateSystem;
 using UnityEngine;
 
 namespace Manager.Camera
@@ -25,59 +26,63 @@ namespace Manager.Camera
             }
         }
 
-        public GameObject[] cameras;
-        public List<GameObject> camerasInScene = new List<GameObject>();
+        public Dictionary<CameraEnum, GameObject> camerasInScene = new Dictionary<CameraEnum, GameObject>();
+        public GameObject[] camerasReferences;
         private GameObject _startTarget;
 
         private const int _zoomOut = 7;
         private const int _zoomIn = 3;
         private const float _zoomSpeed = 2f;
-
-
-        [ClientRpc]
-        public void RpcSpawnCamerasIntoScene()
+        
+        public void Start()
         {
-            // Temp skip player camera
-            for (var i = 1; i < cameras.Length; i++)
+            // Could be bad practice?
+            //var cameras = GameObject.FindGameObjectsWithTag("Camera");
+            if (camerasReferences == null)
             {
-                var cam = Instantiate(cameras[i], cameras[i].transform.position, cameras[i].transform.rotation);
-                NetworkServer.Spawn(cam);
-
-                if (i == (int) CameraEnum.GameBoardCamera)
-                {
-                    NetworkHelpers.RpcToggleObjectVisibility(cam, false);
-                }
-
-                camerasInScene.Add(cam);
+                return;
             }
 
-            // Temp add the scene camera into our scene cameras list
-            camerasInScene.Insert(0, cameras[(int) CameraEnum.PlayerCamera]);
+            foreach (var cam in camerasReferences)
+            {
+                var type = cam.GetComponent<CameraValue>();
+                if (type == null)
+                {
+                    return;
+                }
+                
+                camerasInScene.Add(type.cameraType, cam);
+            }
         }
 
-        [ClientRpc]
-        public void RpcChangeCameraTargetPlayer(CameraEnum camera, Transform target)
+       [Command(requiresAuthority = false)]
+        public void CmdChangeCameraTargetPlayer(CameraEnum cameraType, Transform target)
         {
-            var followPlayer = camerasInScene[(int) camera].gameObject.GetComponent<FollowPlayer>();
+            RpcChangeCameraTargetPlayer(cameraType, target);
+        }
+        
+        [ClientRpc]
+        private void RpcChangeCameraTargetPlayer(CameraEnum cameraType, Transform target)
+        {
+            var followPlayer = camerasInScene[cameraType].gameObject.GetComponent<FollowPlayer>();
             if (followPlayer != null)
             {
                 followPlayer.target = target;
             }
         }
 
-        [ClientRpc]
-        public void RpcMoveCameraPositionTo(CameraEnum camera, Transform target)
+        [Command]
+        public void RpcMoveCameraPositionTo(CameraEnum cameraType, Transform target)
         {
-            var newPosition = new Vector3(target.transform.position.x,
-                camerasInScene[(int) camera].gameObject.transform.position.y, target.transform.position.z);
-
-            camerasInScene[(int) camera].gameObject.transform.position = newPosition;
+            var targetPosition = target.transform.position;
+            var newPosition = new Vector3(targetPosition.x,camerasInScene[cameraType].transform.position.y, targetPosition.z);
+            camerasInScene[cameraType].transform.position = newPosition;
         }
 
         [Obsolete]
-        public void MoveCameraToPlayerSmooth(CameraEnum camera, Transform target)
+        public void MoveCameraToPlayerSmooth(CameraEnum cameraType, Transform target)
         {
-            var followPlayer = camerasInScene[(int) camera].gameObject.GetComponent<FollowPlayer>();
+            var followPlayer = camerasInScene[cameraType].gameObject.GetComponent<FollowPlayer>();
 
             followPlayer.target.position = Vector3.Lerp(followPlayer.transform.position,
                 target.position, _zoomSpeed * Time.deltaTime);
@@ -86,15 +91,15 @@ namespace Manager.Camera
         [ClientRpc]
         public void RpcEnablePlayerCamera()
         {
-            camerasInScene?[(int) CameraEnum.PlayerCamera].gameObject.SetActive(true);
-            camerasInScene?[(int) CameraEnum.GameBoardCamera].gameObject.SetActive(false);
+            camerasInScene?[CameraEnum.PlayerCamera].gameObject.SetActive(true);
+            camerasInScene?[CameraEnum.GameBoardCamera].gameObject.SetActive(false);
         }
 
         [ClientRpc]
         public void RpcEnableGameBoardCamera()
         {
-            camerasInScene?[(int) CameraEnum.GameBoardCamera].gameObject.SetActive(true);
-            camerasInScene?[(int) CameraEnum.PlayerCamera].gameObject.SetActive(false);
+            camerasInScene?[CameraEnum.GameBoardCamera].gameObject.SetActive(true);
+            camerasInScene?[CameraEnum.PlayerCamera].gameObject.SetActive(false);
         }
 
         [ClientRpc]

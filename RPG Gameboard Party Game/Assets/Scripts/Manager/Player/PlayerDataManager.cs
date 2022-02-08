@@ -10,32 +10,46 @@ namespace Manager.Player
 {
     public class PlayerDataManager
     {
-        private SyncDictionary <uint, PlayerData> _playerDataDict = new SyncDictionary <uint, PlayerData>();
+        private static readonly PlayerDataManager instance = new PlayerDataManager();
+        public static PlayerDataManager Instance => instance;
+        static PlayerDataManager()
+        {
+        }
 
+        private PlayerDataManager()
+        {
+        }
+
+
+      
+        private readonly SyncDictionary<uint, PlayerData> _playerDataDict = new SyncDictionary<uint, PlayerData>();
         private List<GameObject> _players;
         private PlayerData _playerData;
+
         
         [Command]
         public void CmdAddPlayer(NetworkIdentity networkIdentity, GameObject player)
         {
-            if (_playerDataDict.ContainsKey(networkIdentity.netId))
-            {
-                return;
-            }
-
             var data = new PlayerData()
             {
                 NetworkIdentity = networkIdentity,
                 Player = player,
-                PositionIndex = 0,
+                PlayerTurnId = CmdGetTotalPlayers(),
+                BoardLocationIndex = 0,
                 Inventory = new Inventory(networkIdentity.netId),
                 IsPlayerTurnStarted = true,
                 PlayerSpeed = 20
             };
 
+            if (_playerDataDict.ContainsKey(networkIdentity.netId))
+            {
+                return;
+            }
+
             _playerDataDict.Add(networkIdentity.netId, data);
         }
-        
+
+
         [Command]
         public void CmdRemovePlayer(uint playerId)
         {
@@ -45,21 +59,28 @@ namespace Manager.Player
             }
         }
         
+
         [Command]
         public void CmdUpdatePlayerData(uint playerId, PlayerData data)
+        {
+            UpdatePlayerData(playerId, data);
+        }
+
+        [ClientRpc]
+        private void UpdatePlayerData(uint playerId, PlayerData data)
         {
             if (_playerDataDict.ContainsKey(playerId))
             {
                 _playerDataDict[playerId] = data;
             }
         }
-        
+
         [Command]
         public PlayerData CmdGetPlayerData(uint playerId)
         {
             return !_playerDataDict.ContainsKey(playerId) ? new PlayerData() : _playerDataDict[playerId];
         }
-        
+
         [Command]
         public PlayerData CmdGetPlayerDataFromIndex(int index)
         {
@@ -70,13 +91,13 @@ namespace Manager.Player
 
             return _playerDataDict.ElementAt(index).Value;
         }
-        
+
         [Command]
         public int CmdGetTotalPlayers()
         {
             return _playerDataDict.Count;
         }
-        
+
         [Command]
         public List<PlayerData> CmdGetAllPlayerData()
         {
