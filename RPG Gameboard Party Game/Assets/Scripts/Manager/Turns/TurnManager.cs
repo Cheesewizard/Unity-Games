@@ -1,74 +1,79 @@
 ﻿using Mirror;
 using Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Manager.Turns
 {
-    public class TurnManager
+    public class TurnManager : NetworkBehaviour
     {
         [SyncVar] private int _totalPlayers;
         [SyncVar] private int _maxTurns;
         [SyncVar] private int _currentTurn;
-        [SyncVar] private int _currentPlayerIndex = 0;
+        [SyncVar] public int currentPlayerTurnOrder;
 
-        private static readonly TurnManager instance = new TurnManager();
-        public static TurnManager Instance => instance;
+        public static TurnManager Instance { get; private set; }
 
-        static TurnManager()
+        private void Awake()
         {
+            // If there is an instance, and it's not me, delete myself.
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                Instance = this;
+            }
         }
 
-        private TurnManager()
-        {
-        }
-        
-        [Command]
         public void SetTotalPlayers(int totalPlayers)
         {
             _totalPlayers = totalPlayers;
         }
-        
-        [Command]
+
         public void SetTotalTurns(int maxTurns)
         {
             _maxTurns = maxTurns;
         }
-        
-        
+
+
         public void CmdIncrementTurnOrder()
         {
             IncrementPlayerIndex();
             IncrementTotalTurns();
             IncrementTurnOrder();
         }
-        
-        [ClientRpc]
+
         private void IncrementPlayerIndex()
         {
-            _currentPlayerIndex += 1;
+            currentPlayerTurnOrder += 1;
         }
-        
-        [ClientRpc]
+
         private void IncrementTotalTurns()
         {
             // if total turns == max turns, exit game?
             if (_currentTurn == _maxTurns)
             {
-                Debug.Log("last Turn");
+                Debug.Log("Last Turn");
             }
 
             _currentTurn++;
         }
-        
-        [ClientRpc]
+
         private void IncrementTurnOrder()
         {
-            _currentPlayerIndex %= _totalPlayers;
+            if (_totalPlayers == 1)
+            {
+                return;
+            }
+
+            currentPlayerTurnOrder %= _totalPlayers;
         }
-        
+
         public PlayerEnum CmdGetCurrentPlayer()
         {
-            return (PlayerEnum) _currentPlayerIndex;
+            return (PlayerEnum) currentPlayerTurnOrder;
         }
     }
 }

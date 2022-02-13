@@ -1,7 +1,6 @@
 ﻿using Manager.Player;
 using Mirror;
 using Player;
-using States.GameBoard.StateSystem;
 using UnityEngine;
 
 namespace Helpers
@@ -10,8 +9,8 @@ namespace Helpers
     {
         public static bool PlayerHasAuthority(PlayerEnum player)
         {
-            return PlayerDataManager.Instance.CmdGetPlayerDataFromIndex((int) player).NetworkIdentity
-                .hasAuthority;
+            //return PlayerDataManager.Instance.currentPlayerData.NetworkIdentity.hasAuthority;
+            return true;
         }
 
         [ClientRpc]

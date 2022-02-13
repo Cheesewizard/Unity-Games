@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game.Player;
 using Mirror;
 using Player;
 using TMPro;
@@ -29,7 +30,7 @@ namespace Manager.UI
         
    
         public TextMeshProUGUI[] playerCoinsUI;
-        public Dictionary<uint, TextMeshProUGUI> playerCointsDict = new Dictionary<uint, TextMeshProUGUI>();
+        public Dictionary<int, TextMeshProUGUI> playerCointsDict = new Dictionary<int, TextMeshProUGUI>();
         private readonly string _moneyHeader = "Coins ";
 
         [Command]
@@ -39,7 +40,7 @@ namespace Manager.UI
             for (var i = 0; i < playerDatas.Count; i++)
             {
                 // map a ui to each player, already setup in the editor
-                playerCointsDict.Add(playerDatas[i].NetworkIdentity.netId, playerCoinsUI[i]);
+                playerCointsDict.Add(playerDatas[i].playerId, playerCoinsUI[i]);
             }
         }
         
@@ -56,7 +57,7 @@ namespace Manager.UI
         }
         
         [ClientRpc]
-        public void UpdateMoney(uint playerId, int money)
+        public void UpdateMoney(int playerId, int money)
         {
             // if (money <= 0)
             // {

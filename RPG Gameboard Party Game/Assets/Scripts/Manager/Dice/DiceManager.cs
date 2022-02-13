@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Helpers;
+using Manager.Player;
 using Mirror;
-using States.GameBoard.StateSystem;
 using UnityEngine;
 
 namespace Manager.Dice
@@ -29,8 +27,7 @@ namespace Manager.Dice
 
 
         public GameObject dice;
-
-        public Transform dicePosition;
+        public Transform diceParent;
         public readonly List<GameObject> diceInScene = new List<GameObject>();
 
         [Command(requiresAuthority = false)]
@@ -38,10 +35,12 @@ namespace Manager.Dice
         {
             InstantiateDiceInScene(amount);
             MoveDiceEqualDistanceApart();
-            NetworkHelpers.RpcToggleObjectVisibility(dicePosition.gameObject, false);
+            NetworkHelpers.RpcToggleObjectVisibility(diceParent.gameObject, false);
             OrganiseDiceInScene();
             SpawnDice();
-            MoveDiceToTarget(GameBoardSystem.Instance.playerData.Player.transform);
+            
+            var target = NetworkServer.spawned[PlayerDataManager.Instance.currentPlayerData.networkInstanceId];
+            MoveDiceToTarget(target.transform);
         }
 
         [ClientRpc]
@@ -49,7 +48,7 @@ namespace Manager.Dice
         {
             for (var i = 0; i < amount; i++)
             {
-                var die = Instantiate(dice, dicePosition.transform.position, Quaternion.identity);
+                var die = Instantiate(dice, diceParent.transform.position, Quaternion.identity);
                 diceInScene.Add(die);
             }
         }
@@ -102,11 +101,11 @@ namespace Manager.Dice
             }
 
             // Set dice parent to be the center of the dice array bounds
-            dicePosition.transform.position = totalBounds.center;
+            diceParent.transform.position = totalBounds.center;
 
             foreach (var die in diceInScene)
             {
-                die.transform.SetParent(dicePosition.transform);
+                die.transform.SetParent(diceParent.transform);
             }
         }
 
@@ -114,11 +113,17 @@ namespace Manager.Dice
         private void MoveDiceToTarget(Transform target)
         {
             var position = target.transform.position;
-            dicePosition.transform.position = new Vector3(position.x, position.y + 2, position.z);
+            diceParent.transform.position = new Vector3(position.x, position.y + 2, position.z);
         }
 
+        [Command (requiresAuthority = false)]
+        public void CmdRemoveDiceFromScene()
+        {
+            RpcRemoveDiceFromScene();
+        }
+        
         [ClientRpc]
-        public void RemoveDiceFromScene()
+        private void RpcRemoveDiceFromScene()
         {
             foreach (var die in diceInScene)
             {

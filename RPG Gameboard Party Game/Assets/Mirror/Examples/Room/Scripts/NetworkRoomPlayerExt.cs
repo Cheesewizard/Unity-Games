@@ -8,7 +8,7 @@ namespace Mirror.Examples.NetworkRoom
     {
         public override void OnStartClient()
         {
-            //Debug.Log($"OnStartClient {gameObject}");
+            Debug.Log($"OnStartClient {gameObject}");
         }
 
         public override void OnClientEnterRoom()

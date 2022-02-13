@@ -1,107 +1,101 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using Game.Player;
 using Mirror;
-using Player;
-using Player.Inventory;
-using UnityEngine;
 
 namespace Manager.Player
 {
-    public class PlayerDataManager
+    public class PlayerDataManager : NetworkBehaviour
     {
-        private static readonly PlayerDataManager instance = new PlayerDataManager();
-        public static PlayerDataManager Instance => instance;
-        static PlayerDataManager()
+        public static PlayerDataManager Instance { get; private set; }
+
+        private void Awake()
         {
-        }
-
-        private PlayerDataManager()
-        {
-        }
-
-
-      
-        private readonly SyncDictionary<uint, PlayerData> _playerDataDict = new SyncDictionary<uint, PlayerData>();
-        private List<GameObject> _players;
-        private PlayerData _playerData;
-
-        
-        [Command]
-        public void CmdAddPlayer(NetworkIdentity networkIdentity, GameObject player)
-        {
-            var data = new PlayerData()
+            // If there is an instance, and it's not me, delete myself.
+            if (Instance != null && Instance != this)
             {
-                NetworkIdentity = networkIdentity,
-                Player = player,
-                PlayerTurnId = CmdGetTotalPlayers(),
-                BoardLocationIndex = 0,
-                Inventory = new Inventory(networkIdentity.netId),
-                IsPlayerTurnStarted = true,
-                PlayerSpeed = 20
-            };
+                Destroy(this);
+            }
+            else
+            {
+                Instance = this;
+            }
+        }
 
-            if (_playerDataDict.ContainsKey(networkIdentity.netId))
+        private void Start()
+        {
+            _playerDataDict.Callback += CmdRefreshTotalPlayers;
+        }
+
+        public PlayerData currentPlayerData;
+
+        [SyncVar] public int totalPlayers;
+        private readonly SyncDictionary<int, PlayerData> _playerDataDict = new SyncDictionary<int, PlayerData>();
+
+        [Command(requiresAuthority = false)]
+        public void CmdAddPlayerToServer(PlayerData player)
+        {
+            if (_playerDataDict.ContainsKey(player.playerId))
             {
                 return;
             }
 
-            _playerDataDict.Add(networkIdentity.netId, data);
+            _playerDataDict.Add(player.playerId, player);
         }
 
-
-        [Command]
-        public void CmdRemovePlayer(uint playerId)
+        [Command(requiresAuthority = false)]
+        public void CmdRemovePlayer(int playerId)
         {
             if (_playerDataDict.ContainsKey(playerId))
             {
                 _playerDataDict.Remove(playerId);
             }
         }
-        
 
-        [Command]
-        public void CmdUpdatePlayerData(uint playerId, PlayerData data)
-        {
-            UpdatePlayerData(playerId, data);
-        }
+        // This may not sync the dictionary to other clients. needs testing.
 
-        [ClientRpc]
-        private void UpdatePlayerData(uint playerId, PlayerData data)
+        [Command(requiresAuthority = false)]
+        public void CmdUpdatePlayerData(int playerId, PlayerData data)
         {
             if (_playerDataDict.ContainsKey(playerId))
             {
                 _playerDataDict[playerId] = data;
+                currentPlayerData = data;
             }
         }
 
-        [Command]
-        public PlayerData CmdGetPlayerData(uint playerId)
+        [Command(requiresAuthority = false)]
+        public void CmdSetPlayerData(NetworkIdentity identity, int index)
         {
-            return !_playerDataDict.ContainsKey(playerId) ? new PlayerData() : _playerDataDict[playerId];
+            TargetSetPlayerData(identity.connectionToClient, index);
         }
 
-        [Command]
-        public PlayerData CmdGetPlayerDataFromIndex(int index)
+        [TargetRpc]
+        private void TargetSetPlayerData(NetworkConnection conn, int index)
         {
             if (_playerDataDict.Count == 0)
             {
                 throw new Exception("Player data manager does not contain any data or the index doesnt exist");
             }
 
-            return _playerDataDict.ElementAt(index).Value;
+            currentPlayerData = _playerDataDict.ElementAt(index).Value;
         }
 
-        [Command]
-        public int CmdGetTotalPlayers()
+        [Client]
+        public void SetLocalPlayerData(PlayerData player)
         {
-            return _playerDataDict.Count;
+            currentPlayerData = player;
         }
 
-        [Command]
-        public List<PlayerData> CmdGetAllPlayerData()
+        private void CmdRefreshTotalPlayers(SyncDictionary<int, PlayerData>.Operation op, int key, PlayerData item)
         {
-            return _playerDataDict.Select((t, i) => _playerDataDict.ElementAt(i).Value).ToList();
+            totalPlayers = _playerDataDict.Count;
+        }
+
+        public int GetPlayerNumber()
+        {
+            // Add one because internally we start with player 0;
+            return currentPlayerData.playerId + 1;
         }
     }
 }
