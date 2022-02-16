@@ -16,8 +16,7 @@ namespace Helpers
         {
             GetMovement();
         }
-
-        [Command(requiresAuthority = false)]
+        
         private void GetMovement()
         {
             var movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -31,8 +30,7 @@ namespace Helpers
             _lastMovement = movement;
             MoveCamera(movement);
         }
-
-        [ClientRpc]
+        
         private void MoveCamera(Vector3 movement)
         {
             transform.position += movement * speed * Time.deltaTime;

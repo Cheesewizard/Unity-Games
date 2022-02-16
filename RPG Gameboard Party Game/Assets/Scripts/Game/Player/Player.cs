@@ -1,7 +1,9 @@
 ﻿using System;
 using Game.States.GameBoard.StateSystem;
+using Manager.Camera;
 using Manager.Player;
 using Mirror;
+using Player;
 using UnityEngine;
 
 namespace Game.Player
@@ -13,8 +15,10 @@ namespace Game.Player
 
         [SyncVar(hook = nameof(OnColorChanged))]
         public Color playerColor;
-        
-        [SyncVar(hook = nameof(OnPlayerIdChanged))] public int playerId;
+
+        [SyncVar(hook = nameof(OnPlayerIdChanged))]
+        public int playerId;
+
         private int _thisPlayerId;
 
         // Callbacks
@@ -24,7 +28,7 @@ namespace Game.Player
             _playerMaterialClone.color = _New;
             GetComponentInChildren<Renderer>().material = _playerMaterialClone;
         }
-        
+
         void OnPlayerIdChanged(int _Old, int _New)
         {
             _thisPlayerId = _New;
@@ -39,10 +43,22 @@ namespace Game.Player
             GetPlayerNetworkIdentity();
             var player = CreatePlayerData();
             PlayerDataManager.Instance.CmdAddPlayerToServer(player);
-            PlayerDataManager.Instance.SetLocalPlayerData(player);
 
             var gameBoardSystem = FindObjectOfType<GameBoardSystem>();
-            gameBoardSystem.playerId = playerId + 1;
+            gameBoardSystem.playerId = playerId;
+            gameBoardSystem.playerCamera = gameObject.GetComponent<PlayerCameraManager>();
+
+            // Set the camera to player one on game start
+            if (playerId == (int) PlayerEnum.Player1)
+            {
+                gameBoardSystem.playerCamera.CmdEnablePlayerCamera();
+            }
+            else
+            {
+                gameBoardSystem.playerCamera.CmdDisablePlayerCamera();
+            }
+            
+
             gameBoardSystem.StartGame();
         }
 

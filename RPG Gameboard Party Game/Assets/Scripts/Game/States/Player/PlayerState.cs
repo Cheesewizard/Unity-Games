@@ -73,7 +73,7 @@ namespace Game.States.Player
         
         private void GoToDiceState()
         {
-            gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new global::Game.States.Dice.DiceState(gameSystem)));
+            gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new Dice.DiceState(gameSystem)));
         }
         
         private void GoToGameBoardCameraState()

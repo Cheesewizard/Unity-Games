@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using Game.Player;
 using Mirror;
 
@@ -24,78 +24,60 @@ namespace Manager.Player
 
         private void Start()
         {
-            _playerDataDict.Callback += CmdRefreshTotalPlayers;
+            serverPlayerDataDict.Callback += UpdateClientPlayerData;
         }
 
-        public PlayerData currentPlayerData;
+        private void UpdateClientPlayerData(SyncIDictionary<int, PlayerData>.Operation op, int key, PlayerData item)
+        {
+            foreach (var player in serverPlayerDataDict)
+            {
+                // Force re-update local player list
+                if (clientPlayerDataDict.ContainsKey(player.Key))
+                {
+                    clientPlayerDataDict[player.Key] = player.Value;
+                }
+                // Add player to local player list
+                else
+                {
+                    clientPlayerDataDict.Add(player.Key, player.Value);
+                }
+
+            }
+        }
 
         [SyncVar] public int totalPlayers;
-        private readonly SyncDictionary<int, PlayerData> _playerDataDict = new SyncDictionary<int, PlayerData>();
+        public readonly SyncDictionary<int, PlayerData> serverPlayerDataDict = new SyncDictionary<int, PlayerData>();
+        public readonly Dictionary<int, PlayerData> clientPlayerDataDict = new Dictionary<int, PlayerData>();
 
         [Command(requiresAuthority = false)]
         public void CmdAddPlayerToServer(PlayerData player)
         {
-            if (_playerDataDict.ContainsKey(player.playerId))
+            if (serverPlayerDataDict.ContainsKey(player.playerId))
             {
                 return;
             }
 
-            _playerDataDict.Add(player.playerId, player);
+            serverPlayerDataDict.Add(player.playerId, player);
         }
 
         [Command(requiresAuthority = false)]
         public void CmdRemovePlayer(int playerId)
         {
-            if (_playerDataDict.ContainsKey(playerId))
+            if (serverPlayerDataDict.ContainsKey(playerId))
             {
-                _playerDataDict.Remove(playerId);
+                serverPlayerDataDict.Remove(playerId);
             }
         }
 
         // This may not sync the dictionary to other clients. needs testing.
 
         [Command(requiresAuthority = false)]
-        public void CmdUpdatePlayerData(int playerId, PlayerData data)
+        public void CmdUpdatePlayerData(int playerId, PlayerData player)
         {
-            if (_playerDataDict.ContainsKey(playerId))
+            if (serverPlayerDataDict.ContainsKey(playerId))
             {
-                _playerDataDict[playerId] = data;
-                currentPlayerData = data;
+                serverPlayerDataDict[playerId] = player;
             }
-        }
-
-        [Command(requiresAuthority = false)]
-        public void CmdSetPlayerData(NetworkIdentity identity, int index)
-        {
-            TargetSetPlayerData(identity.connectionToClient, index);
-        }
-
-        [TargetRpc]
-        private void TargetSetPlayerData(NetworkConnection conn, int index)
-        {
-            if (_playerDataDict.Count == 0)
-            {
-                throw new Exception("Player data manager does not contain any data or the index doesnt exist");
-            }
-
-            currentPlayerData = _playerDataDict.ElementAt(index).Value;
-        }
-
-        [Client]
-        public void SetLocalPlayerData(PlayerData player)
-        {
-            currentPlayerData = player;
-        }
-
-        private void CmdRefreshTotalPlayers(SyncDictionary<int, PlayerData>.Operation op, int key, PlayerData item)
-        {
-            totalPlayers = _playerDataDict.Count;
-        }
-
-        public int GetPlayerNumber()
-        {
-            // Add one because internally we start with player 0;
-            return currentPlayerData.playerId + 1;
         }
     }
 }

@@ -1,11 +1,7 @@
 ﻿using System.Collections;
-using Camera;
 using Game.States.GameBoard;
 using Game.States.GameBoard.StateSystem;
-using Manager.Camera;
-using Manager.Player;
 using Player;
-using States.GameBoard.StateSystem;
 using UnityEngine;
 
 namespace Game.States.Menus
@@ -18,7 +14,7 @@ namespace Game.States.Menus
 
         public override IEnumerator Enter()
         {
-            if (PlayerDataManager.Instance.currentPlayerData.playerId != (int) PlayerEnum.Player1)
+            if (gameSystem.playerId != (int) PlayerEnum.Player1)
             {
                 GoToGameSetupState();
             }
@@ -45,8 +41,7 @@ namespace Game.States.Menus
                 return;
             }
 
-            if (!gameSystem.startGame &&
-                PlayerDataManager.Instance.currentPlayerData.playerId == (int) PlayerEnum.Player1)
+            if (!gameSystem.startGame && gameSystem.playerId == (int) PlayerEnum.Player1)
             {
                 gameSystem.SetStartingValues();
                 CheckGameConfigIsSet();

@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Helpers;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using Game.GameBoard.Dice;
 using Manager.Player;
+using Manager.Turns;
 using Mirror;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Manager.Dice
 {
@@ -26,111 +29,156 @@ namespace Manager.Dice
         }
 
 
-        public GameObject dice;
-        public Transform diceParent;
-        public readonly List<GameObject> diceInScene = new List<GameObject>();
+        public List<GameObject> dicePrefabs = new List<GameObject>();
+        [SyncVar] public GameObject currentDice;
+        [SyncVar] public int previousDiceAmount;
+        public int diceAmountOverride;
 
-        [Command(requiresAuthority = false)]
-        public void CmdSpawnDice(int amount)
+        private void Start()
         {
-            InstantiateDiceInScene(amount);
-            MoveDiceEqualDistanceApart();
-            NetworkHelpers.RpcToggleObjectVisibility(diceParent.gameObject, false);
-            OrganiseDiceInScene();
-            SpawnDice();
-            
-            var target = NetworkServer.spawned[PlayerDataManager.Instance.currentPlayerData.networkInstanceId];
-            MoveDiceToTarget(target.transform);
+            MovementManager.Instance.serverMovement.Callback += MovementChange;
         }
 
-        [ClientRpc]
-        private void InstantiateDiceInScene(int amount)
-        {
-            for (var i = 0; i < amount; i++)
-            {
-                var die = Instantiate(dice, diceParent.transform.position, Quaternion.identity);
-                diceInScene.Add(die);
-            }
-        }
 
-        private void SpawnDice()
-        {
-            // Spawn the dice that have been setup in the client worlds
-            foreach (var die in diceInScene)
-            {
-                NetworkServer.Spawn(die);
-            }
-        }
+        // Spawning Dice
 
-        [ClientRpc]
-        private void MoveDiceEqualDistanceApart()
+        public void DiceSetup(int amount)
         {
-            const float offset = 3f;
-
-            // Arrange dice as more get added dynamically. Only needs arranging if more that 1 is added
-            if (diceInScene.Count <= 1)
+            if (currentDice != null)
             {
+                CmdToggleDiceEnabledInScene(true);
                 return;
             }
 
-            for (var i = 0; i < diceInScene.Count; i++)
-            {
-                var pos = diceInScene[i].gameObject.transform.position;
-                if (i == 0)
-                {
-                    diceInScene[i].transform.position = new Vector3(pos.x - offset, pos.y, pos.z);
-                    continue;
-                }
+            // Override if dice amount set in the inspector (debugging)
+            amount = diceAmountOverride != 0 ? diceAmountOverride : amount;
 
-                var previousPos = diceInScene[i - 1].gameObject.transform.position;
-                var width = diceInScene[i - 1].gameObject.GetComponentInChildren<MeshRenderer>().bounds.size.x;
-                diceInScene[i].transform.position = new Vector3(previousPos.x + ((width / 2) * offset), pos.y, pos.z);
-            }
+            SpawnDice(amount);
         }
 
-        [ClientRpc]
-        private void OrganiseDiceInScene()
+        private void SpawnDice(int amount)
         {
-            var totalBounds = diceInScene[0].GetComponentInChildren<MeshRenderer>().bounds;
+            if (previousDiceAmount == amount) return;
 
-            // Skip 1 as we dont want to parent object 
-            foreach (var die in diceInScene.Skip(1))
-            {
-                var r = die.GetComponentInChildren<MeshRenderer>();
-                totalBounds.Encapsulate(r.bounds);
-            }
+            CmdSpawnDice(amount);
+            CmdMoveDiceToTarget();
+        }
 
-            // Set dice parent to be the center of the dice array bounds
-            diceParent.transform.position = totalBounds.center;
+        [Command(requiresAuthority = false)]
+        private void CmdMoveDiceToTarget()
+        {
+            var target = PlayerDataManager.Instance.clientPlayerDataDict[TurnManager.Instance.currentPlayerTurnOrder]
+                .Identity.gameObject;
 
-            foreach (var die in diceInScene)
-            {
-                die.transform.SetParent(diceParent.transform);
-            }
+            RpcMoveDiceToTarget(target.transform, currentDice);
         }
 
         [ClientRpc]
-        private void MoveDiceToTarget(Transform target)
+        private void RpcMoveDiceToTarget(Transform target, GameObject dice)
         {
             var position = target.transform.position;
-            diceParent.transform.position = new Vector3(position.x, position.y + 2, position.z);
+            dice.transform.position = new Vector3(position.x, position.y + 2, position.z);
         }
 
-        [Command (requiresAuthority = false)]
+        [Command(requiresAuthority = false)]
+        private void CmdSpawnDice(int amount)
+        {
+            var dice = Instantiate(dicePrefabs[amount - 1], dicePrefabs[amount - 1].transform.position,
+                Quaternion.identity);
+
+            NetworkServer.Spawn(dice);
+            previousDiceAmount = amount;
+            currentDice = dice;
+        }
+
+
+        [Command(requiresAuthority = false)]
+        public void CmdToggleDiceEnabledInScene(bool isVisible)
+        {
+            var target = currentDice;
+            RpcToggleDiceEnabledInScene(target, isVisible);
+        }
+
+        [ClientRpc]
+        private void RpcToggleDiceEnabledInScene(GameObject target, bool isVisible)
+        {
+            target.SetActive(isVisible);
+        }
+
+
+        [Command(requiresAuthority = false)]
         public void CmdRemoveDiceFromScene()
         {
             RpcRemoveDiceFromScene();
         }
-        
+
         [ClientRpc]
         private void RpcRemoveDiceFromScene()
         {
-            foreach (var die in diceInScene)
-            {
-                NetworkServer.Destroy(die);
-            }
+            if (currentDice == null) return;
 
-            diceInScene.Clear();
+            previousDiceAmount = 0;
+            NetworkServer.Destroy(currentDice);
+        }
+
+
+        // Dice Interactions
+
+        public void ActivateDice()
+        {
+            Debug.Log("Hit the dice block");
+            SetRandomDiceNumber();
+        }
+
+        private void SetRandomDiceNumber()
+        {
+            for (var i = 0; i < previousDiceAmount; i++)
+            {
+                MovementManager.Instance.CmdAddMovementAmount(GetRandomDiceNumber());
+            }
+        }
+
+        private int GetRandomDiceNumber()
+        {
+            var die = Random.Range(1, 7);
+            Debug.Log("Dice = " + die);
+            return die;
+        }
+
+        private void MovementChange(SyncList<int>.Operation op, int itemindex, int oldNumber, int newNumber)
+        {
+            if (op == SyncList<int>.Operation.OP_ADD && currentDice != null)
+            {
+                CmdSetDiceToNumber(itemindex, newNumber);
+            }
+        }
+
+        [Command(requiresAuthority = false)]
+        private void CmdSetDiceToNumber(int index, int number)
+        {
+            var parent = currentDice.transform;
+            var child = parent.GetChild(index);
+
+            var animateDice = child.GetComponentInChildren<AnimateDice>();
+            if (animateDice == null) return;
+
+            animateDice.SetDiceToNumber(number);
+            RpcPlayParticleEffect(index);
+        }
+
+        // Particle Effects
+
+        [ClientRpc]
+        private void RpcPlayParticleEffect(int index)
+        {
+            var parent = currentDice.transform;
+            var child = parent.GetChild(index);
+
+            var effect = child.GetComponentInChildren<DiceParticleEffects>();
+            if (effect != null)
+            {
+                effect.PlayDiceHitEffect();
+            }
         }
     }
 }

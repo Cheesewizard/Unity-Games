@@ -1,20 +1,19 @@
-﻿using Manager.Player;
-using Mirror;
-using Player;
+﻿using Mirror;
 using UnityEngine;
 
 namespace Helpers
 {
     public static class NetworkHelpers
     {
-        public static bool PlayerHasAuthority(PlayerEnum player)
-        {
-            //return PlayerDataManager.Instance.currentPlayerData.NetworkIdentity.hasAuthority;
-            return true;
-        }
 
+        [Command (requiresAuthority = false)]
+        public static void CmdToggleObjectVisibility(GameObject gameObject, bool isVisible)
+        {
+            RcpToggleObjectVisibility(gameObject, isVisible);
+        }
+        
         [ClientRpc]
-        public static void RpcToggleObjectVisibility(GameObject gameObject, bool isVisible)
+        public static void  RcpToggleObjectVisibility(GameObject gameObject, bool isVisible)
         {
             gameObject.SetActive(isVisible);
         }

@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using Game.GameBoard.Tiles;
 using Game.States.GameBoard.StateSystem;
-using Manager.Camera;
 using Manager.Player;
-using States.GameBoard.StateSystem;
 using UnityEngine;
 
 namespace Game.States.Player
@@ -16,14 +14,15 @@ namespace Game.States.Player
 
         public override IEnumerator Enter()
         {
-            
             Debug.Log($"Player {gameSystem.playerId} Entered Game Tile");
             var tileEffect = gameSystem.currentTile.GetComponent<ITile>();
             if (tileEffect != null)
             {
                 Debug.Log("Tile Activated");
-                var data = tileEffect.ActivateTile(PlayerDataManager.Instance.currentPlayerData);
-                PlayerDataManager.Instance.CmdUpdatePlayerData(PlayerDataManager.Instance.currentPlayerData.playerId,data);
+                var data = tileEffect.ActivateTile(
+                    PlayerDataManager.Instance.clientPlayerDataDict[gameSystem.playerId]);
+                PlayerDataManager.Instance.CmdUpdatePlayerData(gameSystem.playerId, data);
+                yield return new WaitForSeconds(2);
             }
 
             gameSystem.StartCoroutine(gameSystem.TransitionToState(1, new PlayerEndTurnState(gameSystem)));
@@ -37,7 +36,7 @@ namespace Game.States.Player
 
         public override void Tick()
         {
-            CameraManager.Instance.CmdZoomIn();
+            gameSystem.playerCamera.CmdZoomIn();
         }
     }
 }

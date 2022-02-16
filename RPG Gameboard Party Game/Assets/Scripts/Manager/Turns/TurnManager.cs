@@ -1,15 +1,13 @@
 ﻿using Mirror;
-using Player;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Manager.Turns
 {
     public class TurnManager : NetworkBehaviour
     {
-        [SyncVar] private int _totalPlayers;
-        [SyncVar] private int _maxTurns;
-        [SyncVar] private int _currentTurn;
+        [SyncVar] public int _totalPlayers;
+        [SyncVar] public int _maxTurns;
+        [SyncVar] public int _currentTurn;
         [SyncVar] public int currentPlayerTurnOrder;
 
         public static TurnManager Instance { get; private set; }
@@ -38,18 +36,19 @@ namespace Manager.Turns
         }
 
 
+        [Command(requiresAuthority = false)]
         public void CmdIncrementTurnOrder()
         {
             IncrementPlayerIndex();
             IncrementTotalTurns();
             IncrementTurnOrder();
         }
-
+        
         private void IncrementPlayerIndex()
         {
             currentPlayerTurnOrder += 1;
         }
-
+        
         private void IncrementTotalTurns()
         {
             // if total turns == max turns, exit game?
@@ -60,7 +59,7 @@ namespace Manager.Turns
 
             _currentTurn++;
         }
-
+        
         private void IncrementTurnOrder()
         {
             if (_totalPlayers == 1)
@@ -69,11 +68,6 @@ namespace Manager.Turns
             }
 
             currentPlayerTurnOrder %= _totalPlayers;
-        }
-
-        public PlayerEnum CmdGetCurrentPlayer()
-        {
-            return (PlayerEnum) currentPlayerTurnOrder;
         }
     }
 }

@@ -1,31 +1,33 @@
-﻿using Mirror;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DiceParticleEffects : NetworkBehaviour
+namespace Game.GameBoard.Dice
 {
-    [Header("Particle Effects")] 
-    [SerializeField]
-    private ParticleSystem _diceHitEffect;
-
-    [SerializeField] 
-    private ParticleSystem _diceIdleEffect;
-    
-    public void Start()
+    public class DiceParticleEffects : MonoBehaviour
     {
-        //diceRotate.rotate = true;
-        _diceIdleEffect.Play();
+        [Header("Particle Effects")] 
+        [SerializeField]
+        private ParticleSystem _diceHitEffect;
 
-        //DiceIsPlaying?.Invoke(true);k
-        //DiceIsPlaying?.Invoke(true);k
-    }
+        [SerializeField] 
+        private ParticleSystem _diceIdleEffect;
     
-    public void PlayDiceHitEffect()
-    {
-        //diceRotate.rotate = false;
-        _diceIdleEffect.Stop();
-        _diceHitEffect.Play();
+        public void Start()
+        {
+            //diceRotate.rotate = true;
+            _diceIdleEffect.Play();
 
-        //DiceIsHit?.Invoke();
-        //DiceIsPlaying?.Invoke(false);
+            //DiceIsPlaying?.Invoke(true);k
+            //DiceIsPlaying?.Invoke(true);k
+        }
+    
+        public void PlayDiceHitEffect()
+        {
+            //diceRotate.rotate = false;
+            _diceIdleEffect.Stop();
+            _diceHitEffect.Play();
+
+            //DiceIsHit?.Invoke();
+            //DiceIsPlaying?.Invoke(false);
+        }
     }
 }

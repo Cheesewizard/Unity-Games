@@ -1,13 +1,12 @@
 ﻿using System.Collections;
-using Game.States.GameBoard.StateSystem;
 
-namespace States.GameBoard.StateSystem
+namespace Game.States.GameBoard.StateSystem
 {
     public abstract class GameStates
     {
         protected GameBoardSystem gameSystem;
 
-        public GameStates(GameBoardSystem system)
+        protected GameStates(GameBoardSystem system)
         {
             gameSystem = system;
         }

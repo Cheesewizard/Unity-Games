@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using Game.GameBoard;
 using Game.States.Menus;
+using Manager.Camera;
 using Manager.Player;
 using Manager.Turns;
 using Mirror;
 using States.GameBoard.StateSystem;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.States.GameBoard.StateSystem
 {
@@ -17,12 +17,13 @@ namespace Game.States.GameBoard.StateSystem
         public Route gameBoard;
         [HideInInspector] public GameObject currentTile;
 
-        // Dice
-        [HideInInspector] public List<int> diceNumbers = new List<int>();
-
         // Data
         [SyncVar] [HideInInspector] public bool startGame = false;
+
         public int playerId;
+
+        // Camera
+        public PlayerCameraManager playerCamera;
 
         public void StartGame()
         {
@@ -52,33 +53,14 @@ namespace Game.States.GameBoard.StateSystem
         private void SetGameData()
         {
             //UIManager.Instance.SetupPlayerCoinsUI(PlayerDataManager.Instance.CmdGetAllPlayerData());
-            TurnManager.Instance.SetTotalPlayers(PlayerDataManager.Instance.totalPlayers);
+            TurnManager.Instance.SetTotalPlayers(PlayerDataManager.Instance.clientPlayerDataDict.Count);
             TurnManager.Instance.SetTotalTurns(10);
             startGame = true;
         }
 
-
-        [SyncVar]
-        private int _prevPlayerId = -1;
-
-        [Client]
-        public bool IsPlayerTurn()
+        public bool IsPlayerTurn(int id)
         {
-            var player = PlayerDataManager.Instance.currentPlayerData;
-
-            var playerTurn = player.playerId == TurnManager.Instance.currentPlayerTurnOrder;
-            if (playerTurn && player.playerId != _prevPlayerId)
-            {
-                _prevPlayerId = player.playerId;
-                return true;
-            }
-
-            return false;
-        }
-
-        public void IsPlayerTurnResetDebug()
-        {
-            _prevPlayerId = -1;
+            return id == TurnManager.Instance.currentPlayerTurnOrder;
         }
     }
 }

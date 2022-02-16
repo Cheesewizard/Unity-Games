@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Linq;
-using Game.States.GameBoard;
 using Game.States.GameBoard.StateSystem;
 using Helpers;
-using Manager.Camera;
+using Manager;
+using Manager.Dice;
 using Manager.Player;
-using Mirror;
-using States.GameBoard.StateSystem;
+using Manager.Turns;
 using UnityEngine;
 
 namespace Game.States.Player
@@ -27,23 +26,28 @@ namespace Game.States.Player
             Init();
 
             yield return gameSystem.StartCoroutine(Move());
-            yield return gameSystem.StartCoroutine(gameSystem.TransitionToState(1, new PlayerCheckTileState(gameSystem)));
+            yield return gameSystem.StartCoroutine(
+                gameSystem.TransitionToState(1, new PlayerCheckTileState(gameSystem)));
         }
 
         protected void Init()
         {
-            var target = PlayerDataManager.Instance.currentPlayerData.Identity.gameObject;
-            _routePosition = PlayerDataManager.Instance.currentPlayerData.boardLocationIndex;
+            var target = PlayerDataManager.Instance.clientPlayerDataDict[TurnManager.Instance.currentPlayerTurnOrder]
+                .Identity.gameObject;
+            _routePosition = PlayerDataManager.Instance
+                .clientPlayerDataDict[TurnManager.Instance.currentPlayerTurnOrder].boardLocationIndex;
             _movePosition = target.GetComponent<MoveToTarget>();
 
             // Total the value of all the dice and add to amount of steps able to take
-            _steps = gameSystem.diceNumbers.Sum();
+            _steps = MovementManager.Instance.movement.Sum();
         }
 
         public override IEnumerator Exit()
         {
             // Reset the dice numbers for the next player
-            gameSystem.diceNumbers.Clear();
+            MovementManager.Instance.CmdClearMovement();
+
+            DiceManager.Instance.CmdRemoveDiceFromScene();
 
             // Move player smaller and move into the corner? 
             yield return null;
@@ -51,7 +55,7 @@ namespace Game.States.Player
 
         public override void Tick()
         {
-            CameraManager.Instance.CmdZoomOut();
+            gameSystem.playerCamera.CmdZoomOut();
         }
 
         protected IEnumerator Move()
@@ -65,7 +69,9 @@ namespace Game.States.Player
 
                 gameSystem.currentTile = gameSystem.gameBoard.childNodesList[_routePosition].gameObject;
                 var nextPos = gameSystem.gameBoard.childNodesList[_routePosition].position;
-                while (_movePosition.MoveToNextNode(nextPos, PlayerDataManager.Instance.currentPlayerData.PlayerSpeed))
+                while (_movePosition.MoveToNextNode(nextPos,
+                           PlayerDataManager.Instance.clientPlayerDataDict[TurnManager.Instance.currentPlayerTurnOrder]
+                               .PlayerSpeed))
                 {
                     yield return null;
                 }
@@ -83,9 +89,9 @@ namespace Game.States.Player
 
         private void UpdatePlayerPosition()
         {
-            var data = PlayerDataManager.Instance.currentPlayerData;
+            var data = PlayerDataManager.Instance.clientPlayerDataDict[gameSystem.playerId];
             data.boardLocationIndex = _routePosition;
-            PlayerDataManager.Instance.CmdUpdatePlayerData(PlayerDataManager.Instance.currentPlayerData.playerId, data);
+            PlayerDataManager.Instance.CmdUpdatePlayerData(gameSystem.playerId, data);
         }
     }
 }

@@ -1,14 +1,24 @@
-﻿using Mirror;
+﻿using System;
+using Mirror;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-namespace GameBoard.Dice
+namespace Game.GameBoard.Dice
 {
-    public class AnimateDice : NetworkBehaviour
+    public class AnimateDice : MonoBehaviour
     {
         private const float SpinSpeed = 500f;
         [SerializeField] private Vector3 axis;
         private const int LowAxisRange = 1;
-        private const int HighAxisRange = 361;
+        private const int HighAxisRange = 361; 
+        public bool rotate = true;
+
+        private void OnEnable()
+        {
+            rotate = true;
+            // axis = new Vector3(Random.Range(LowAxisRange, HighAxisRange), Random.Range(LowAxisRange, HighAxisRange),
+            //     Random.Range(LowAxisRange, HighAxisRange));
+        }
 
         private void Start()
         {
@@ -16,27 +26,21 @@ namespace GameBoard.Dice
                 Random.Range(LowAxisRange, HighAxisRange));
         }
 
-        [Client]
         void Update()
         {
             Rotate();
         }
-
-        [Client]
+        
         private void Rotate()
         {
-            transform.Rotate(axis, SpinSpeed * Time.deltaTime, Space.Self);
+            if (rotate)
+                transform.Rotate(axis, SpinSpeed * Time.deltaTime, Space.Self);
         }
 
-        [Command]
-        public void CmdSetDiceToNumber(int diceNumber)
+        public void SetDiceToNumber(int diceNumber)
         {
-            RcpSetDiceToNumber(diceNumber);
-        }
-
-        [ClientRpc]
-        private void RcpSetDiceToNumber(int diceNumber)
-        {
+            rotate = false;
+            
             switch (diceNumber)
             {
                 case 1:
