@@ -1,11 +1,7 @@
 ﻿using System.Collections;
 using Game.States.GameBoard;
 using Game.States.GameBoard.StateSystem;
-using Manager.Player;
-using Manager.Turns;
 using Mirror;
-using States.GameBoard;
-using States.GameBoard.StateSystem;
 using UnityEngine;
 
 namespace Game.States.Player

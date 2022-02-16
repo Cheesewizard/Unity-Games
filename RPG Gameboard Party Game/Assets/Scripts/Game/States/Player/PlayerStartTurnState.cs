@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Game.Player.UI;
 using Game.States.GameBoard.StateSystem;
 using UnityEngine;
 
@@ -12,6 +13,9 @@ namespace Game.States.Player
 
         public override IEnumerator Enter()
         {
+            PlayerUI.Instance.CmdSetPlayerStartName(gameSystem.playerId);
+            PlayerUI.Instance.CmdTogglePlayerStartCanvas(true);
+
             Debug.Log($"Player {gameSystem.playerId} Entered Begin Turn");
             Debug.Log("Press Space To Continue");
             yield return null;
@@ -26,14 +30,13 @@ namespace Game.States.Player
         {
             CmdStartTurnButton();
         }
-        
+
         private void CmdStartTurnButton()
         {
             // Press space to continue
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                gameSystem.StartCoroutine(gameSystem.TransitionToState(0.5f, new PlayerState(gameSystem)));
-            }
+            if (!Input.GetKeyDown(KeyCode.Space)) return;
+            gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new PlayerState(gameSystem)));
+            PlayerUI.Instance.CmdTogglePlayerStartCanvas(false);
         }
     }
 }

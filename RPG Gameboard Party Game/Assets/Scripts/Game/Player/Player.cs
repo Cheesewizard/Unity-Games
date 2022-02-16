@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Player.UI;
 using Game.States.GameBoard.StateSystem;
 using Manager.Camera;
 using Manager.Player;
@@ -20,6 +21,8 @@ namespace Game.Player
         public int playerId;
 
         private int _thisPlayerId;
+        private Canvas _playerStartCanvas;
+        public PlayerUI playerUi;
 
         // Callbacks
         void OnColorChanged(Color _Old, Color _New)
@@ -38,6 +41,8 @@ namespace Game.Player
         public Action<bool> PlayerMoving;
         public Action<int> PlayerSteps;
 
+
+        // Start
         public override void OnStartLocalPlayer()
         {
             GetPlayerNetworkIdentity();
@@ -57,7 +62,7 @@ namespace Game.Player
             {
                 gameBoardSystem.playerCamera.CmdDisablePlayerCamera();
             }
-            
+
 
             gameBoardSystem.StartGame();
         }
@@ -90,7 +95,6 @@ namespace Game.Player
                 Identity = _networkIdentity
             };
         }
-
 
         private void OnEnable()
         {
