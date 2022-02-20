@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game.Player;
+using Manager.UI;
 using Mirror;
 
 namespace Manager.Player
@@ -21,51 +22,66 @@ namespace Manager.Player
                 Instance = this;
             }
         }
-
-        private void Start()
+        
+        public readonly SyncDictionary<int, PlayerData> serverPlayerData = new SyncDictionary<int, PlayerData>();
+        public readonly Dictionary<int, PlayerData> clientPlayerData = new Dictionary<int, PlayerData>();
+        
+        private void OnEnable()
         {
-            serverPlayerDataDict.Callback += UpdateClientPlayerData;
+            serverPlayerData.Callback += OnUpdateClientPlayerData;
+            serverPlayerData.Callback += OnAddPlayer;
         }
 
-        private void UpdateClientPlayerData(SyncIDictionary<int, PlayerData>.Operation op, int key, PlayerData item)
+        private void OnDisable()
         {
-            foreach (var player in serverPlayerDataDict)
+            serverPlayerData.Callback -= OnUpdateClientPlayerData;
+            serverPlayerData.Callback -= OnAddPlayer;
+        }
+
+        private void OnAddPlayer(SyncIDictionary<int, PlayerData>.Operation op, int key, PlayerData item)
+        {
+            if (op == SyncIDictionary<int, PlayerData>.Operation.OP_ADD)
+            {
+                GameBoardUIManager.Instance.CmdTogglePlayerUIPanels(item);
+            }
+        }
+
+        private void OnUpdateClientPlayerData(SyncIDictionary<int, PlayerData>.Operation op, int key, PlayerData item)
+        {
+            foreach (var player in serverPlayerData)
             {
                 // Force re-update local player list
-                if (clientPlayerDataDict.ContainsKey(player.Key))
+                if (clientPlayerData.ContainsKey(player.Key))
                 {
-                    clientPlayerDataDict[player.Key] = player.Value;
+                    clientPlayerData[player.Key] = player.Value;
                 }
                 // Add player to local player list
                 else
                 {
-                    clientPlayerDataDict.Add(player.Key, player.Value);
+                    clientPlayerData.Add(player.Key, player.Value);
                 }
-
             }
         }
 
-        [SyncVar] public int totalPlayers;
-        public readonly SyncDictionary<int, PlayerData> serverPlayerDataDict = new SyncDictionary<int, PlayerData>();
-        public readonly Dictionary<int, PlayerData> clientPlayerDataDict = new Dictionary<int, PlayerData>();
+      
 
         [Command(requiresAuthority = false)]
         public void CmdAddPlayerToServer(PlayerData player)
         {
-            if (serverPlayerDataDict.ContainsKey(player.playerId))
+            if (serverPlayerData.ContainsKey(player.playerId))
             {
                 return;
             }
 
-            serverPlayerDataDict.Add(player.playerId, player);
+            serverPlayerData.Add(player.playerId, player);
         }
 
         [Command(requiresAuthority = false)]
         public void CmdRemovePlayer(int playerId)
         {
-            if (serverPlayerDataDict.ContainsKey(playerId))
+            if (serverPlayerData.ContainsKey(playerId))
             {
-                serverPlayerDataDict.Remove(playerId);
+                serverPlayerData.Remove(playerId);
             }
         }
 
@@ -74,9 +90,9 @@ namespace Manager.Player
         [Command(requiresAuthority = false)]
         public void CmdUpdatePlayerData(int playerId, PlayerData player)
         {
-            if (serverPlayerDataDict.ContainsKey(playerId))
+            if (serverPlayerData.ContainsKey(playerId))
             {
-                serverPlayerDataDict[playerId] = player;
+                serverPlayerData[playerId] = player;
             }
         }
     }

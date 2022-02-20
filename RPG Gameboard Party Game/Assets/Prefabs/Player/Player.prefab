@@ -165,6 +165,7 @@ MonoBehaviour:
   syncInterval: 0.1
   playerColor: {r: 0, g: 0, b: 0, a: 0}
   playerId: 0
+  playerUIManager: {fileID: 0}
 --- !u!114 &6066604800012092627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +181,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerCamera: {fileID: 638778470740602446}
-  gameboardCamera: {fileID: 6568128335263463796, guid: 1199df8a445e91e419fe57cb3d0e5ae3, type: 3}
+  gameboardCamera: {fileID: 4339946975453981936, guid: 67b14182168f66147b11c7a1cd23314f, type: 3}
 --- !u!114 &9083825344104039454
 MonoBehaviour:
   m_ObjectHideFlags: 0

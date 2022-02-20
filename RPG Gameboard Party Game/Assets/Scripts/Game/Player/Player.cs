@@ -1,8 +1,10 @@
 ﻿using System;
-using Game.Player.UI;
 using Game.States.GameBoard.StateSystem;
 using Manager.Camera;
+using Manager.Inventory;
+using Manager.Money;
 using Manager.Player;
+using Manager.UI;
 using Mirror;
 using Player;
 using UnityEngine;
@@ -22,7 +24,7 @@ namespace Game.Player
 
         private int _thisPlayerId;
         private Canvas _playerStartCanvas;
-        public PlayerUI playerUi;
+        public PlayerUIManager playerUIManager;
 
         // Callbacks
         void OnColorChanged(Color _Old, Color _New)
@@ -48,10 +50,13 @@ namespace Game.Player
             GetPlayerNetworkIdentity();
             var player = CreatePlayerData();
             PlayerDataManager.Instance.CmdAddPlayerToServer(player);
+            MoneyManager.Instance.CmdPlayerMoneySetup(playerId);
+            InventoryManager.Instance.CmdSetupPlayerInventory(playerId);
 
+            // Gameboard data
             var gameBoardSystem = FindObjectOfType<GameBoardSystem>();
             gameBoardSystem.playerId = playerId;
-            gameBoardSystem.playerCamera = gameObject.GetComponent<PlayerCameraManager>();
+            gameBoardSystem.playerCamera = gameObject.GetComponent<PlayerCamera>();
 
             // Set the camera to player one on game start
             if (playerId == (int) PlayerEnum.Player1)

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2931225480850578654}
   - component: {fileID: 2931225480850578653}
   - component: {fileID: 5220796071538392994}
+  - component: {fileID: 8248726032087345217}
   m_Layer: 0
   m_Name: Remove_Money_Tile
   m_TagString: Untagged
@@ -109,3 +110,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ae46ab6d0989143a28195a4c75f1af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8248726032087345217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2931225480850578643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e63e063a6a74bc0ab78bd9198f160c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: fb095711ce05da4468e2f2302fb4ce81, type: 2}

@@ -101,7 +101,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   speed: 10
-  isEnabled: 0
 --- !u!114 &7158208944096933909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,17 +133,17 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   clientAuthority: 0
-  sendInterval: 0.05
+  sendInterval: 0
   syncPosition: 1
-  syncRotation: 1
+  syncRotation: 0
   syncScale: 0
   interpolatePosition: 1
   interpolateRotation: 1
   interpolateScale: 0
   bufferTimeMultiplier: 1
   bufferSizeLimit: 64
-  catchupThreshold: 4
-  catchupMultiplier: 0.1
+  catchupThreshold: 5
+  catchupMultiplier: 0.02
   onlySyncOnChange: 1
   bufferResetMultiplier: 5
   positionSensitivity: 0.01

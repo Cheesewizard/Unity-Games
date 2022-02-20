@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2931225480850578654}
   - component: {fileID: 2931225480850578653}
   - component: {fileID: 3015307115587876491}
+  - component: {fileID: -3721581208595190994}
   m_Layer: 0
   m_Name: Add_Money_Tile
   m_TagString: Untagged
@@ -53,6 +54,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -108,3 +110,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54ecd0c3a51a05047bf3067d64a39c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+--- !u!114 &-3721581208595190994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2931225480850578643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e63e063a6a74bc0ab78bd9198f160c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: fb095711ce05da4468e2f2302fb4ce81, type: 2}

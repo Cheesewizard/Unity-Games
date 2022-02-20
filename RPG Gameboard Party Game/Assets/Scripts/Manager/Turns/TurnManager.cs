@@ -39,16 +39,22 @@ namespace Manager.Turns
         [Command(requiresAuthority = false)]
         public void CmdIncrementTurnOrder()
         {
+            // Debugging
+            if (_totalPlayers == 1)
+            {
+                return;
+            }
+
             IncrementPlayerIndex();
             IncrementTotalTurns();
             IncrementTurnOrder();
         }
-        
+
         private void IncrementPlayerIndex()
         {
             currentPlayerTurnOrder += 1;
         }
-        
+
         private void IncrementTotalTurns()
         {
             // if total turns == max turns, exit game?
@@ -59,14 +65,9 @@ namespace Manager.Turns
 
             _currentTurn++;
         }
-        
+
         private void IncrementTurnOrder()
         {
-            if (_totalPlayers == 1)
-            {
-                return;
-            }
-
             currentPlayerTurnOrder %= _totalPlayers;
         }
     }

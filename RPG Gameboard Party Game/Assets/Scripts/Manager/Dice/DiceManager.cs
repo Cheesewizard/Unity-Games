@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.GameBoard.Dice;
+using Manager.Movement;
 using Manager.Player;
 using Manager.Turns;
 using Mirror;
@@ -33,6 +32,8 @@ namespace Manager.Dice
         [SyncVar] public GameObject currentDice;
         [SyncVar] public int previousDiceAmount;
         public int diceAmountOverride;
+        public int[] debugDiceNumbers;
+        public bool debug;
 
         private void Start()
         {
@@ -67,7 +68,7 @@ namespace Manager.Dice
         [Command(requiresAuthority = false)]
         private void CmdMoveDiceToTarget()
         {
-            var target = PlayerDataManager.Instance.clientPlayerDataDict[TurnManager.Instance.currentPlayerTurnOrder]
+            var target = PlayerDataManager.Instance.clientPlayerData[TurnManager.Instance.currentPlayerTurnOrder]
                 .Identity.gameObject;
 
             RpcMoveDiceToTarget(target.transform, currentDice);
@@ -134,12 +135,21 @@ namespace Manager.Dice
         {
             for (var i = 0; i < previousDiceAmount; i++)
             {
-                MovementManager.Instance.CmdAddMovementAmount(GetRandomDiceNumber());
+                if (!debug)
+                {
+                    var die = GetRandomDiceNumber();
+                    MovementManager.Instance.CmdAddMovementAmount(die);
+                }
+                else
+                {
+                    MovementManager.Instance.CmdAddMovementAmount(debugDiceNumbers[i]);
+                }
             }
         }
 
         private int GetRandomDiceNumber()
         {
+            
             var die = Random.Range(1, 7);
             Debug.Log("Dice = " + die);
             return die;

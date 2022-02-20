@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a17832df2d04ab1a23669bff937f224, type: 3}
+  m_Name: Basic Item Tile Inventory
+  m_EditorClassIdentifier: 
+  inventory:
+  - item: {fileID: 11400000, guid: 132c37bd0c86f9f46bca5cf6c6e589b4, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 3a14e74f25feb684792a4fb840066cd7, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 359128e9326088248a960842e005382c, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 06c7148db0ec7084e80bae0d04a12b76, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: f986e2efe38348f4d8de31a1d74e6c77, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 548f685f0b8362e4c8798fe82166eaaa, type: 2}
+    amount: 2

@@ -16,7 +16,7 @@ namespace Game.States.GameBoard
         public override IEnumerator Enter()
         {
             Debug.Log($"Player {gameSystem.playerId} Entered looking At GameBoard");
-            gameSystem.playerCamera.CmdEnableGameBoardCamera();
+            gameSystem.gameBoardCamera.CmdEnableGameBoardCamera();
             yield return null;
         }
 
@@ -50,7 +50,7 @@ namespace Game.States.GameBoard
         private void GoToPlayerState()
         {
             gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new PlayerState(gameSystem)));
-            gameSystem.playerCamera.CmdDisableGameBoardCamera();
+            gameSystem.gameBoardCamera.CmdDisableGameBoardCamera();
         }
     }
 }

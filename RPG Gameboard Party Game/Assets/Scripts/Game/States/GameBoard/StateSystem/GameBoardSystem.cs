@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using Game.GameBoard;
 using Game.States.Menus;
 using Manager.Camera;
@@ -23,11 +22,13 @@ namespace Game.States.GameBoard.StateSystem
         public int playerId;
 
         // Camera
-        public PlayerCameraManager playerCamera;
+        public PlayerCamera playerCamera;
+        public GameboardCamera gameBoardCamera;
 
         public void StartGame()
         {
             gameBoard = FindObjectOfType<Route>();
+            gameBoardCamera = FindObjectOfType<GameboardCamera>();
 
             // Start the game flow
             currentState = new CharacterSetupState(this);
@@ -53,7 +54,7 @@ namespace Game.States.GameBoard.StateSystem
         private void SetGameData()
         {
             //UIManager.Instance.SetupPlayerCoinsUI(PlayerDataManager.Instance.CmdGetAllPlayerData());
-            TurnManager.Instance.SetTotalPlayers(PlayerDataManager.Instance.clientPlayerDataDict.Count);
+            TurnManager.Instance.SetTotalPlayers(PlayerDataManager.Instance.clientPlayerData.Count);
             TurnManager.Instance.SetTotalTurns(10);
             startGame = true;
         }

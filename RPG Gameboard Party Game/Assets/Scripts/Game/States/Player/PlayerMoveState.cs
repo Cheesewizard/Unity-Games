@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Linq;
+using Game.States.GameBoard;
 using Game.States.GameBoard.StateSystem;
 using Helpers;
 using Manager;
 using Manager.Dice;
+using Manager.Movement;
 using Manager.Player;
 using Manager.Turns;
 using UnityEngine;
@@ -27,15 +29,15 @@ namespace Game.States.Player
 
             yield return gameSystem.StartCoroutine(Move());
             yield return gameSystem.StartCoroutine(
-                gameSystem.TransitionToState(1, new PlayerCheckTileState(gameSystem)));
+                gameSystem.TransitionToState(1, new TileCheckState(gameSystem)));
         }
 
         protected void Init()
         {
-            var target = PlayerDataManager.Instance.clientPlayerDataDict[TurnManager.Instance.currentPlayerTurnOrder]
+            var target = PlayerDataManager.Instance.clientPlayerData[TurnManager.Instance.currentPlayerTurnOrder]
                 .Identity.gameObject;
             _routePosition = PlayerDataManager.Instance
-                .clientPlayerDataDict[TurnManager.Instance.currentPlayerTurnOrder].boardLocationIndex;
+                .clientPlayerData[TurnManager.Instance.currentPlayerTurnOrder].boardLocationIndex;
             _movePosition = target.GetComponent<MoveToTarget>();
 
             // Total the value of all the dice and add to amount of steps able to take
@@ -70,7 +72,7 @@ namespace Game.States.Player
                 gameSystem.currentTile = gameSystem.gameBoard.childNodesList[_routePosition].gameObject;
                 var nextPos = gameSystem.gameBoard.childNodesList[_routePosition].position;
                 while (_movePosition.MoveToNextNode(nextPos,
-                           PlayerDataManager.Instance.clientPlayerDataDict[TurnManager.Instance.currentPlayerTurnOrder]
+                           PlayerDataManager.Instance.clientPlayerData[TurnManager.Instance.currentPlayerTurnOrder]
                                .PlayerSpeed))
                 {
                     yield return null;
@@ -89,7 +91,7 @@ namespace Game.States.Player
 
         private void UpdatePlayerPosition()
         {
-            var data = PlayerDataManager.Instance.clientPlayerDataDict[gameSystem.playerId];
+            var data = PlayerDataManager.Instance.clientPlayerData[gameSystem.playerId];
             data.boardLocationIndex = _routePosition;
             PlayerDataManager.Instance.CmdUpdatePlayerData(gameSystem.playerId, data);
         }
