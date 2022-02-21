@@ -2,162 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c29203e5-3e5e-4452-bcfa-8c28d0679445" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Objects.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Inventory.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Inventory/Basic Item Tile Inventory.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Inventory/Basic Item Tile Inventory.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Asset Lists.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Asset Lists/Armour.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Asset Lists/Armour/armourList.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Asset Lists/Armour/armourList.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Asset Lists/Default.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Asset Lists/Default/defaultItemList.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Asset Lists/Default/defaultItemList.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Asset Lists/Food.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Asset Lists/Food/FoodList.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Asset Lists/Food/FoodList.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Asset Lists/Money.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Asset Lists/Money/moneyList.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Asset Lists/Money/moneyList.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Asset Lists/Weapons.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Asset Lists/Weapons/WeaponList.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Asset Lists/Weapons/WeaponList.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Default.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Default/Bones.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Default/Bones.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Default/Old Book.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Default/Old Book.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Equipment.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Equipment/Armour.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Equipment/Armour/Old Frying Pan.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Equipment/Armour/Old Frying Pan.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Equipment/Armour/Wooden Shield.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Equipment/Armour/Wooden Shield.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Equipment/Armour/Worn Gloves.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Equipment/Armour/Worn Gloves.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Equipment/Weapons.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Equipment/Weapons/Rusty Fork.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Equipment/Weapons/Rusty Fork.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Equipment/Weapons/Tree Branch.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Equipment/Weapons/Tree Branch.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Equipment/Weapons/Wooden Sword.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Equipment/Weapons/Wooden Sword.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Food.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Food/Pizza.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Items/Food/Pizza.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Money.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Money/Coins.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Objects/Money/Coins.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/Player Stats Player 1.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/Player Stats Player 1.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/Player Stats.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/Player Stats.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Inventory.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Inventory/Shops.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Inventory/Shops/Equipment.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Inventory/Shops/Item.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Inventory/Tiles.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Inventory/Tutorial.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Items/Item.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Items/Item.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Items/ItemDatabase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Items/ItemDatabase.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Tiles/Card.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Tiles/Items.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Tiles/Items/BasicRandomItem.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Tiles/Items/BasicRandomItem.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Tiles/Money.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Tiles/Money/AddMoney.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Tiles/Money/RemoveMoney.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/Camera/GameboardCamera.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/Camera/GameboardCamera.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/Inventory.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/Inventory/InventoryManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/Inventory/InventoryManager.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/Money.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/Money/MoneyManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/Money/MoneyManager.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/Movement.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/UI/GameBoardUIManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/UI/GameBoardUIManager.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/AssetList.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/AssetList.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Cards.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Cards/Attack.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Cards/Defence.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Cards/Movement.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Inventory.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Inventory/InventoryObject.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Inventory/InventoryObject.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Items.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Items/Default.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Items/Default/DefaultObject.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Items/Default/DefaultObject.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Items/Equipment.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Items/Equipment/EquipmentObject.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Items/Equipment/EquipmentObject.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Items/Food.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Items/Food/FoodObject.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Items/Food/FoodObject.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Items/ItemObject.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Items/ItemObject.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Money.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Money/MoneyObject.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/ScriptableObjectIdAttribute.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Debugging.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Debugging/DebugMenu.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Debugging/DebugMenu.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/Debug.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/Debug/DebugState.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/Debug/DebugState.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Logger.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Logger/DebugLog.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Logger/DebugLog.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Logger/ILog.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Logger/ILog.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RPG Gameboard Party Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RPG Gameboard Party Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Cameras/Gameboard Camera.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Cameras/Gameboard Camera.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameboard/Board/GameBoard.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameboard/Board/GameBoard.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameboard/Tiles/Add_Money_Tile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Gameboard/Tiles/Add_Money_Tile.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameboard/Tiles/Default_Tile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Gameboard/Tiles/Default_Tile.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameboard/Tiles/Remove_Money_Tile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Gameboard/Tiles/Remove_Money_Tile.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Canvas.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Canvas.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/Player Start Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/Player Start Canvas.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game/GameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main Menu/OfflineScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main Menu/OfflineScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Items/ItemEnum.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Items/ItemEnum.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Tiles/AddMoney.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Tiles/AddMoney.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Tiles/Money/AddMoney.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Tiles/ITile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Tiles/ITile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Tiles/RemoveMoney.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Tiles/RemoveMoney.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameBoard/Tiles/Money/RemoveMoney.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Inventory.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Inventory/IInventory.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Inventory/IInventory.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Money/MoneyObject.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Inventory/Inventory.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Inventory/Inventory.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObject/ScriptableObjectIdAttribute.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Inventory/InventoryManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Inventory/InventoryManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/UI.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/UI/PlayerUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/UI/PlayerUIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/UI/PlayerUI.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/UI/PlayerUIManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/States/Dice/DiceState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/Dice/DiceState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/States/GameBoard/CharacterNowOnTheBoardState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/GameBoard/CharacterNowOnTheBoardState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/States/GameBoard/GameBoardCameraState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/GameBoard/GameBoardCameraState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/States/GameBoard/GameSetupState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/GameBoard/GameSetupState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/States/GameBoard/StateSystem/GameBoardSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/GameBoard/StateSystem/GameBoardSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/States/Player/PlayerCheckTileState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/GameBoard/TileCheckState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/States/Player/PlayerCheckTileState.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/GameBoard/TileCheckState.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/States/GameBoard/StateSystem/StateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/GameBoard/StateSystem/StateMachine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/States/GameBoard/TileCheckState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/GameBoard/TileCheckState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/States/Menus/CharacterSetupState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/Menus/CharacterSetupState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/States/Player/PlayerEndTurnState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/Player/PlayerEndTurnState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/States/Player/PlayerMoveOntoBoardState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/Player/PlayerMoveOntoBoardState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/States/Player/PlayerMoveState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/Player/PlayerMoveState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/States/Player/PlayerStartTurnState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/Player/PlayerStartTurnState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameBoard.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Objects/Cards.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Spawner.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Spawner/Spawner.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameBoard/Spawner/Spawner.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Helpers/MoveTransform.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Helpers/MoveTransform.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Manager/Camera/PlayerCameraManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/Camera/PlayerCamera.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Manager/Camera/PlayerCameraManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/Camera/PlayerCamera.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/States/Player/PlayerState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/Player/PlayerState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/States/Player/PlayerWaitingState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/States/Player/PlayerWaitingState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Manager/Dice/DiceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/Dice/DiceManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Manager/MovementManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/Movement/MovementManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Manager/MovementManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/Movement/MovementManager.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Manager/Player/PlayerDataManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/Player/PlayerDataManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Manager/Turns/TurnManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/Turns/TurnManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,15 +48,19 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a104889781c465ca00c12d0953583e2143c00/a0/1fe06896/UnitySynchronizationContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Downloads/Unity--mirror-multiplayer-rpg-master/Assets/Scripts/Server/SERVERNetworkManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.5.7/Editor/PlasticSCM/Configuration/CloudEdition/Welcome/SSOSignUpPanel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.5.4/Runtime/Utilities/TimelineUndo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a104889781c465ca00c12d0953583e2143c00/32/b63d6a43/ILogger.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/48a85e85d8cd4e21b2b8c1ef4aa8ed55f600/62/2fb205b2/PlayerManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/695d1cc93cca45069c528c15c9fdd7493e2800/d9/26b05c77/IntPtr.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/695d1cc93cca45069c528c15c9fdd7493e2800/fe/212605da/Dictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Button.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b1975b22174b431289ec9891624e4df37000/96/6e5b4971/Input.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a104889781c465ca00c12d0953583e2143c00/9f/860fc520/Camera.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a104889781c465ca00c12d0953583e2143c00/c0/5cd088c7/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a104889781c465ca00c12d0953583e2143c00/b0/c5a325d0/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/UIElements/PanelEventHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/695d1cc93cca45069c528c15c9fdd7493e2800/67/fc0f0eed/GenericEqualityComparer`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.5.4/Runtime/Attributes/TimelineHelpURLAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/695d1cc93cca45069c528c15c9fdd7493e2800/ad/2bf2a14c/Int32.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6a104889781c465ca00c12d0953583e2143c00/5c/522af8a9/SetupCoroutine.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Mirror/Components/NetworkRoomPlayer.cs" root0="FORCE_HIGHLIGHTING" />
@@ -235,10 +111,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="19100">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="24708">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="19100" />
+      <option name="pid" value="24708" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -267,7 +143,8 @@
       <workItem from="1644579525129" duration="12261000" />
       <workItem from="1644628083489" duration="24561000" />
       <workItem from="1644752824735" duration="76434000" />
-      <workItem from="1645363877673" duration="29771000" />
+      <workItem from="1645363877673" duration="30601000" />
+      <workItem from="1645440137450" duration="7457000" />
     </task>
     <servers />
   </component>
@@ -322,52 +199,52 @@
           <line>85</line>
           <properties documentPath="W:\Programming\Unity\Unity-Games\RPG Gameboard Party Game\Assets\Scripts\Manager\Inventory\InventoryManager.cs" initialLine="81" containingFunctionPresentation="method 'CmdRemoveFromInventory'">
             <startOffsets>
-              <option value="2579" />
+              <option value="2637" />
             </startOffsets>
             <endOffsets>
-              <option value="2628" />
+              <option value="2686" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="482" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/ScriptableObject/Inventory/InventoryObject.cs</url>
-          <line>15</line>
-          <properties documentPath="W:\Programming\Unity\Unity-Games\RPG Gameboard Party Game\Assets\Scripts\ScriptableObject\Inventory\InventoryObject.cs" initialLine="15" containingFunctionPresentation="method 'AddToInventory'">
-            <startOffsets>
-              <option value="492" />
-            </startOffsets>
-            <endOffsets>
-              <option value="533" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="495" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Manager/Inventory/InventoryManager.cs</url>
           <line>88</line>
           <properties documentPath="W:\Programming\Unity\Unity-Games\RPG Gameboard Party Game\Assets\Scripts\Manager\Inventory\InventoryManager.cs" initialLine="87" containingFunctionPresentation="method 'CmdRemoveFromInventory'">
             <startOffsets>
-              <option value="2689" />
+              <option value="2747" />
             </startOffsets>
             <endOffsets>
-              <option value="2749" />
+              <option value="2807" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="500" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Manager/Inventory/InventoryManager.cs</url>
-          <line>77</line>
-          <properties documentPath="W:\Programming\Unity\Unity-Games\RPG Gameboard Party Game\Assets\Scripts\Manager\Inventory\InventoryManager.cs" initialLine="76" containingFunctionPresentation="method 'CmdAddToInventory'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Manager/Player/PlayerDataManager.cs</url>
+          <line>95</line>
+          <properties documentPath="W:\Programming\Unity\Unity-Games\RPG Gameboard Party Game\Assets\Scripts\Manager\Player\PlayerDataManager.cs" initialLine="95" containingFunctionPresentation="method 'CmdUpdatePlayerData'">
             <startOffsets>
-              <option value="2256" />
+              <option value="2975" />
             </startOffsets>
             <endOffsets>
-              <option value="2311" />
+              <option value="2976" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="501" />
+          <option name="timeStamp" value="512" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/States/Player/PlayerMoveState.cs</url>
+          <line>46</line>
+          <properties documentPath="W:\Programming\Unity\Unity-Games\RPG Gameboard Party Game\Assets\Scripts\Game\States\Player\PlayerMoveState.cs" initialLine="46" containingFunctionPresentation="method 'Exit'">
+            <startOffsets>
+              <option value="1464" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1508" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="514" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

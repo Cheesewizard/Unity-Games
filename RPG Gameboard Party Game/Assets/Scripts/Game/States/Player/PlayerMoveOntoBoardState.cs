@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using Game.States.GameBoard;
 using Game.States.GameBoard.StateSystem;
-using UnityEngine;
 
 namespace Game.States.Player
 {
@@ -16,11 +15,10 @@ namespace Game.States.Player
             // Set camera to this persons turn on start
             gameSystem.playerCamera.CmdEnablePlayerCamera();
             
-            Debug.Log($"Player {gameSystem.playerId} Entered Move Character Onto The Board State");
-            Init();
-
-            yield return new WaitForSeconds(1);
-            yield return gameSystem.StartCoroutine(base.Move());
+            UnityEngine.Debug.Log($"Player {gameSystem.playerId} Entered Move Character Onto The Board State");
+            InitialiseData();
+            
+            yield return gameSystem.StartCoroutine(Move());
             MoveToCharacterNowOnBoardState();
         }
 

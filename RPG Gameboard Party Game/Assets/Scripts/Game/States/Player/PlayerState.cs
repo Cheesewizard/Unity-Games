@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Game.States.Debug;
 using Game.States.GameBoard;
 using Game.States.GameBoard.StateSystem;
 using Mirror;
@@ -14,7 +15,7 @@ namespace Game.States.Player
 
         public override IEnumerator Enter()
         {
-            Debug.Log($"Player {gameSystem.playerId} Entered Start Turn");
+            gameSystem.message.Log($"Player {gameSystem.playerId} Entered Start Turn");
             yield return null;
         }
 
@@ -34,6 +35,9 @@ namespace Game.States.Player
             CmdDiceButton();
             CmdItemButton();
             CmdCameraButton();
+#if UNITY_EDITOR
+            DebugMenu();
+#endif
         }
 
         [Command]
@@ -42,7 +46,7 @@ namespace Game.States.Player
             // Press space to continue
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("Press Button For Dice");
+                gameSystem.message.Log("Press Button For Dice");
                 GoToDiceState();
             }
         }
@@ -52,7 +56,7 @@ namespace Game.States.Player
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
-                Debug.Log("Press Button For Items");
+                gameSystem.message.Log("Press Button For Items");
                 GoToInventoryState();
             }
         }
@@ -62,23 +66,31 @@ namespace Game.States.Player
         {
             if (Input.GetKeyDown(KeyCode.T))
             {
-                Debug.Log("Press Button For Look At Game Board Camera");
+                gameSystem.message.Log("Press Button For Look At Game Board Camera");
                 GoToGameBoardCameraState();
             }
         }
-        
+
         private void GoToDiceState()
         {
             gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new Dice.DiceState(gameSystem)));
         }
-        
+
         private void GoToGameBoardCameraState()
         {
             gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new GameBoardCameraState(gameSystem)));
         }
-        
+
         private void GoToInventoryState()
         {
+        }
+
+        private void DebugMenu()
+        {
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                gameSystem.StartCoroutine(gameSystem.TransitionToState(0.1f, new DebugState(gameSystem)));
+            }
         }
     }
 }

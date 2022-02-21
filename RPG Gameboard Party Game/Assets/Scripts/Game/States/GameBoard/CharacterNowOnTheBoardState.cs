@@ -13,7 +13,7 @@ namespace Game.States.GameBoard
 
         public override IEnumerator Enter()
         {
-            Debug.Log($"Player {gameSystem.playerId} Now On The Board");
+            gameSystem.message.Log($"Player {gameSystem.playerId} Now On The Board");
             GoToPlayerWaitingState();
             yield return null;
         }

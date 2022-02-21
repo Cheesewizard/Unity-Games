@@ -3,7 +3,6 @@ using System.Linq;
 using Game.States.GameBoard;
 using Game.States.GameBoard.StateSystem;
 using Helpers;
-using Manager;
 using Manager.Dice;
 using Manager.Movement;
 using Manager.Player;
@@ -14,7 +13,6 @@ namespace Game.States.Player
 {
     public class PlayerMoveState : GameStates
     {
-        private int _steps;
         private int _routePosition;
         private MoveToTarget _movePosition;
 
@@ -24,24 +22,23 @@ namespace Game.States.Player
 
         public override IEnumerator Enter()
         {
-            Debug.Log($"Player {gameSystem.playerId} Entered Move Character");
-            Init();
+            gameSystem.message.Log($"Player {gameSystem.playerId} Entered Move Character");
+            InitialiseData();
 
             yield return gameSystem.StartCoroutine(Move());
             yield return gameSystem.StartCoroutine(
                 gameSystem.TransitionToState(1, new TileCheckState(gameSystem)));
         }
 
-        protected void Init()
+        protected void InitialiseData()
         {
             var target = PlayerDataManager.Instance.clientPlayerData[TurnManager.Instance.currentPlayerTurnOrder]
                 .Identity.gameObject;
+            
             _routePosition = PlayerDataManager.Instance
                 .clientPlayerData[TurnManager.Instance.currentPlayerTurnOrder].boardLocationIndex;
+            
             _movePosition = target.GetComponent<MoveToTarget>();
-
-            // Total the value of all the dice and add to amount of steps able to take
-            _steps = MovementManager.Instance.movement.Sum();
         }
 
         public override IEnumerator Exit()
@@ -62,11 +59,11 @@ namespace Game.States.Player
 
         protected IEnumerator Move()
         {
-            //PlayerMoving?.Invoke(true);
+            // Total the value of all the dice and add to amount of steps able to take
+           var steps = MovementManager.Instance.movement.Sum();
 
-            while (_steps > 0)
+            while (steps > 0)
             {
-                //PlayerSteps?.Invoke(steps);
                 _routePosition %= gameSystem.gameBoard.childNodesList.Count;
 
                 gameSystem.currentTile = gameSystem.gameBoard.childNodesList[_routePosition].gameObject;
@@ -80,13 +77,10 @@ namespace Game.States.Player
 
                 yield return new WaitForSeconds(0.1f);
                 _routePosition++;
-                _steps--;
+                steps--;
             }
 
             UpdatePlayerPosition();
-
-            //PlayerSteps?.Invoke(steps);
-            //PlayerMoving?.Invoke(false);
         }
 
         private void UpdatePlayerPosition()

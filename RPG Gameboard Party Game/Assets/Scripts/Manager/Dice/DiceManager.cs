@@ -32,8 +32,6 @@ namespace Manager.Dice
         [SyncVar] public GameObject currentDice;
         [SyncVar] public int previousDiceAmount;
         public int diceAmountOverride;
-        public int[] debugDiceNumbers;
-        public bool debug;
 
         private void Start()
         {
@@ -135,21 +133,13 @@ namespace Manager.Dice
         {
             for (var i = 0; i < previousDiceAmount; i++)
             {
-                if (!debug)
-                {
-                    var die = GetRandomDiceNumber();
-                    MovementManager.Instance.CmdAddMovementAmount(die);
-                }
-                else
-                {
-                    MovementManager.Instance.CmdAddMovementAmount(debugDiceNumbers[i]);
-                }
+                var die = GetRandomDiceNumber();
+                MovementManager.Instance.CmdAddMovementAmount(die);
             }
         }
 
         private int GetRandomDiceNumber()
         {
-            
             var die = Random.Range(1, 7);
             Debug.Log("Dice = " + die);
             return die;

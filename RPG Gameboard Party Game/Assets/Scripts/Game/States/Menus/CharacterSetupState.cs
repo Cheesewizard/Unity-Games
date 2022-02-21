@@ -19,8 +19,8 @@ namespace Game.States.Menus
                 GoToGameSetupState();
             }
             
-            Debug.Log($" Player {gameSystem.playerId} Entered Character Select Screen");
-            Debug.Log("Press E To Accept");
+            gameSystem.message.Log($" Player {gameSystem.playerId} Entered Character Select Screen");
+            gameSystem.message.Log("Press E To Accept");
             yield return null;
         }
 
@@ -52,7 +52,7 @@ namespace Game.States.Menus
         {
             if (!gameSystem.startGame) return;
 
-            Debug.Log("Game Config Set");
+            gameSystem.message.Log("Game Config Set");
             GoToGameSetupState();
         }
 

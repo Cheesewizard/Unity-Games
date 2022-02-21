@@ -13,7 +13,7 @@ namespace Game.States.Player
 
         public override IEnumerator Enter()
         {
-            Debug.Log($"Player {gameSystem.playerId} Entered End Turn");
+            gameSystem.message.Log($"Player {gameSystem.playerId} Entered End Turn");
             gameSystem.StartCoroutine(gameSystem.TransitionToState(1f, new PlayerWaitingState(gameSystem)));
             IncreaseTurnOrder();
             yield return null;

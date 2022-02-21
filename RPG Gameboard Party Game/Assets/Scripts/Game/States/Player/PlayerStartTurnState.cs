@@ -16,8 +16,8 @@ namespace Game.States.Player
             PlayerUIManager.Instance.CmdSetPlayerStartName(gameSystem.playerId);
             PlayerUIManager.Instance.CmdTogglePlayerStartCanvas(true);
 
-            Debug.Log($"Player {gameSystem.playerId} Entered Begin Turn");
-            Debug.Log("Press Space To Continue");
+            gameSystem.message.Log($"Player {gameSystem.playerId} Entered Begin Turn");
+            gameSystem.message.Log("Press Space To Continue");
             yield return null;
         }
 

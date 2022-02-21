@@ -15,7 +15,7 @@ namespace Game.States.GameBoard
 
         public override IEnumerator Enter()
         {
-            Debug.Log($"Player {gameSystem.playerId} Entered looking At GameBoard");
+            gameSystem.message.Log($"Player {gameSystem.playerId} Entered looking At GameBoard");
             gameSystem.gameBoardCamera.CmdEnableGameBoardCamera();
             yield return null;
         }

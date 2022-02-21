@@ -16,7 +16,7 @@ namespace Game.States.GameBoard
 
         public override IEnumerator Enter()
         {
-            Debug.Log($"Player {gameSystem.playerId} Entered Game Setup State (Waiting)");
+            gameSystem.message.Log($"Player {gameSystem.playerId} Entered Game Setup State (Waiting)");
             gameSystem.StartCoroutine(Wait());
             yield return null;
         }
@@ -28,7 +28,7 @@ namespace Game.States.GameBoard
                 yield return new WaitForSeconds(1);
             }
             
-            Debug.Log($"Player {gameSystem.playerId} Starting Game Setup State");
+            gameSystem.message.Log($"Player {gameSystem.playerId} Starting Game Setup State");
             AddToMovement(1);
             GoToMovePlayerOntoBoard();
         }

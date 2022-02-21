@@ -39,7 +39,7 @@ namespace Game.States.Player
         [ClientRpc]
         private void LogPlayerTurn(bool isTurn)
         {
-            Debug.Log(!isTurn
+            gameSystem.message.Log(!isTurn
                 ? $"Player {gameSystem.playerId} Waiting For Turn"
                 : $"Player {gameSystem.playerId} Starting Turn");
         }

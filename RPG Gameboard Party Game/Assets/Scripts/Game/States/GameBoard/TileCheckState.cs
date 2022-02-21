@@ -14,7 +14,7 @@ namespace Game.States.GameBoard
 
         public override IEnumerator Enter()
         {
-            Debug.Log($"Player {gameSystem.playerId} Entered Game Tile");
+            gameSystem.message.Log($"Player {gameSystem.playerId} Entered Game Tile");
             yield return CheckTile();
 
             gameSystem.StartCoroutine(gameSystem.TransitionToState(1, new PlayerEndTurnState(gameSystem)));
@@ -26,7 +26,7 @@ namespace Game.States.GameBoard
             var tile = gameSystem.currentTile.GetComponent<ITile>();
             if (tile == null) yield break;
 
-            Debug.Log("Tile Activated");
+            gameSystem.message.Log("Tile Activated");
             yield return DoTileEffect(tile);
         }
 

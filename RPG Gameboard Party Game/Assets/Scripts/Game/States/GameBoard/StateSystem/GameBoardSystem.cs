@@ -1,11 +1,12 @@
 ﻿using System.Collections;
+using Debugging;
 using Game.GameBoard;
 using Game.States.Menus;
+using Logger;
 using Manager.Camera;
 using Manager.Player;
 using Manager.Turns;
 using Mirror;
-using States.GameBoard.StateSystem;
 using UnityEngine;
 
 namespace Game.States.GameBoard.StateSystem
@@ -22,13 +23,20 @@ namespace Game.States.GameBoard.StateSystem
         public int playerId;
 
         // Camera
-        public PlayerCamera playerCamera;
-        public GameboardCamera gameBoardCamera;
+        [HideInInspector] public PlayerCamera playerCamera;
+        [HideInInspector] public GameboardCamera gameBoardCamera;
+
+        // Logging
+        public ILog message;
+
+        [HideInInspector] public DebugMenu debugMenu;
 
         public void StartGame()
         {
             gameBoard = FindObjectOfType<Route>();
             gameBoardCamera = FindObjectOfType<GameboardCamera>();
+            debugMenu = FindObjectOfType<DebugMenu>();
+            message = new DebugLog();
 
             // Start the game flow
             currentState = new CharacterSetupState(this);
